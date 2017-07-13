@@ -9,3 +9,9 @@ OTHER_ZONES="'us-central1-b','us-central1-c','us-central1-f'"
 CLUSTER_NAME=spinnakerjenkins
 #There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
 NODE_PER_ZONE=1
+
+
+
+##### TLS Paths if you have them enter them here and comment out line in create_jenkins.sh otherwise the files will be created at this locations
+TLS_CERT="certificate.crt"
+TLS_KEY="privatekey.key"

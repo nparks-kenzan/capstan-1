@@ -1,9 +1,22 @@
-######
+#!/usr/bin/env bash
 
-
+##########################
+# Kenzan LLC Create GKE for SpinnakerJenkins
+# 
+## Can your GCP Service Account do this?
+#
+# nparks@kenzan.com
+##########################
 ###
-source env.sh
+source ./env.sh
 
+
+echo "******************************************"
+echo "=========================================="
+echo " - Let's Get this GKE Thing Together -"
+echo "=========================================="
+
+PROJECT_NAME=$(gcloud info --format='value(config.project)')
 
 # Create the Actual GKE cluster
 
@@ -12,3 +25,10 @@ gcloud container --project $PROJECT_NAME clusters create $CLUSTER_NAME --zone $Z
 
 #make kubectl happy for later usage
 gcloud container clusters get-credentials $CLUSTER_NAME
+
+## this is where we need to do a watch command to see what the status of the cluster is
+
+echo "=========================================="
+echo " - GKE Thing Together -"
+echo "=========================================="
+echo "******************************************"
