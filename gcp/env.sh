@@ -12,7 +12,7 @@ OTHER_ZONES=""
 CLUSTER_NAME=spinnakerjenkins
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gcr"
 #There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
-NODE_PER_ZONE=1
+NODE_PER_ZONE=3
 
 #cloud storage location
 BUCKET_LOCATION=us
