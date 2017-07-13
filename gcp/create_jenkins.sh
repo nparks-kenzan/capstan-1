@@ -11,7 +11,7 @@ source ./env.sh
 
 ### GLOBAL ENV ####
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
-JENKINS_NS="jenkins"
+JENKINS_NS=$JENKINSNS
 JENKINS_IMAGE="jenkins-home-image"
 JENKINS_DSK="jenkins-home"
 JENKINS_IMG_TGZ="https://storage.googleapis.com/solutions-public-assets/jenkins-cd/jenkins-home-v3.tar.gz"
@@ -45,29 +45,45 @@ sed -i.bak s#CHANGE_ME#$PASSWORD# jenkins/k8s/options
 
 kubectl create secret generic jenkins --from-file=jenkins/k8s/options --namespace=$JENKINS_NS
 
-echo "Time to be Gangsta"
+echo "======= Time to be Gangsta ========"
 kubectl apply -f jenkins/k8s/
 
+echo "Pausing"
+sleep 30
+
+## we need to do a watch here
+kubectl get pods --namespace $JENKINS_NS
 
 
 
-echo "TLS Time"
+kubectl get svc --namespace jenkins
+
+
+echo "============TLS Time=============="
 
 ### comment out below if you have supplied your own
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $TLS_KEY -out $TLS_CERT -subj "/CN=jenkins/O=jenkins"
 
 kubectl create secret generic tls --from-file=$TLS_CERT --from-file=$TLS_KEY --namespace $JENKINS_NS
 
+#create gap in logs
+sleep 5
+
 kubectl apply -f jenkins/k8s/lb
 
 
 echo "Pausing  before reporting cluster info"
 sleep 10
-kubectl cluster-info
+kubectl cluster-info --namespace $JENKINS_NS
 
 
 #return
 cd ../
+
+echo  $PASSWORD > $JENKINS_SAVED_PW
+#echo JENKINS ADDRESS > $JENKINS_IP
+
+kubectl describe ingress jenkins --namespace $JENKINS_NS
 
 echo "=========================================="
 echo " - Jenkins Thing Together -"
