@@ -39,3 +39,6 @@ OMIT_NAMESPACES=$JENKINSNS
 # we are assuming that glcoud credentials where added properly
 KUBECONFIG="~/.kube/config"
 
+#OAUTH2_CLIENT_SECRET=X
+#OAUTH2_CLIENT_ID=y
+

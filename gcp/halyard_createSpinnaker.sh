@@ -76,6 +76,9 @@ hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME --docker-reg
 hal config provider kubernetes enable
 
 # Let's turn some SSL stuff off at the moment
+echo "==== -> Let's Get that Oauth and SSL stuff set-up"
+
+#hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
 
 hal config security api ssl disable
 
