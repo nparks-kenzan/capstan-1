@@ -19,6 +19,7 @@ The process is illustrated as follows:
 
 
 
+Essentially, from your workstation you are using TerraForm to create a service account and to launch and instance that will run a script landed by terraform to perform the creation of the GKE platform, jenkins, and Spinnaker. Future versions will also use *declarative pipelines*
 
 ### Prerequisites
 
