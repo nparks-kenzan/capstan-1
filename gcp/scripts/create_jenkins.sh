@@ -4,6 +4,7 @@
 # Kenzan LLC Jenkins on Existing GKE
 # 
 # Can your GCP Service Account do this?
+# Did you create the GKE environment first?
 #
 # nparks@kenzan.com
 ##########################

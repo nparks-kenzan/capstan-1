@@ -4,7 +4,7 @@
 # Kenzan LLC Create Spinnaker
 # 
 ## Can your GCP Service Account do this?
-## Did you create a Jenkins?
+## Did you create Jenkins in GKE first?
 #
 # nparks@kenzan.com
 ##########################

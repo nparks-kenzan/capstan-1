@@ -1,7 +1,7 @@
 
 
 
-################## GCP / GKE / Jenkins
+############################################# GCP / GKE / Jenkins
 
 #### Where are We
 ZONE=us-central1-a
@@ -24,11 +24,13 @@ TLS_CERT="certificate.crt"
 TLS_KEY="privatekey.key"
 
 JENKINSNS="jenkins"
+
+
 #only used for spinnaker configuration
 JENKINS_ADMIN_USER="admin"
 JENKINS_SAVED_PW=JenkinsPassword.txt
 
-####### Halyard Spinnaker
+############################################ Halyard Spinnaker
 ADDRESS=gcr.io
 SERVICE_ACCOUNT_NAME=spinnaker-gcr-account
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json

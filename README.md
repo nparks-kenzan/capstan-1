@@ -16,7 +16,7 @@ Tools for creating Spinnaker demo environments
 This Demo environment creates a CD environment where Spinnaker and Jenkins are running within a GKE cluster.
 
 The process is illustrated as follows:
-
+![GCP Process](gcp_process.pnd)
 
 
 Essentially, from your workstation you are using TerraForm to create a service account and to launch and instance that will run a script landed by terraform to perform the creation of the GKE platform, jenkins, and Spinnaker. Future versions will also use *declarative pipelines*
