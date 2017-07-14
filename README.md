@@ -11,7 +11,7 @@ Tools for creating Spinnaker demo environments
 
 
 
-## GCP GKE
+## GCP
 
 This Demo environment creates a CD environment where Spinnaker and Jenkins are running within a GKE cluster.
 
@@ -31,6 +31,18 @@ That's it
 
 
 ### Procedure
+
+1. git clone this repo (fork your own first)
+1. cd to the GCP folder
+1. Execute ` something with terraform`
+1. Go to the bathroom / lunch / another meeting
+1. Hope for the best
+
+--
+
+1. To check that is successfully deployed:
+1. Access the Google Cloud Shell
+
 
 
 
