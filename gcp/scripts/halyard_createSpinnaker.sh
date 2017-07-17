@@ -55,18 +55,23 @@ hal config storage edit --type gcs
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
-#hal config provider docker-registry enable
-
 hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
+hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO 
 
 
+
+hal config provider docker-registry enable
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
+CONTEXT=spinjen_context
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $REGISTRY_NAME --kubeconfig-file $KUBECONFIG
+
+IMAGE_REPOS="$REGISTRY_NAME $DOCKER_HUB_NAME"
+
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $JENKINSNS --kubeconfig-file $KUBECONFIG
 
 hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
