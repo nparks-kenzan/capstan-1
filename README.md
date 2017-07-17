@@ -6,12 +6,12 @@ Tools for creating Spinnaker demo environments
 
 
 
-## AWS
+## Amazon Web Services
+
+see 
 
 
-
-
-## GCP
+## Google Cloud Platform
 
 This Demo environment creates a CD environment where Spinnaker and Jenkins are running within a GKE cluster.
 
