@@ -75,7 +75,7 @@ kubectl apply -f jenkins/k8s/lb
 
 echo "Pausing  before reporting cluster info"
 sleep 10
-kubectl cluster-info --namespace $JENKINS_NS
+kubectl cluster-info 
 
 
 #return
