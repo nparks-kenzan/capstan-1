@@ -26,6 +26,8 @@ gcloud container --project $PROJECT_NAME clusters create $CLUSTER_NAME --zone $Z
 #make kubectl happy for later usage
 gcloud container clusters get-credentials $CLUSTER_NAME
 
+kubectl cluster-info 
+
 ## this is where we need to do a watch command to see what the status of the cluster is
 
 echo "=========================================="
