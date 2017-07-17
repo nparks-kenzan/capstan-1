@@ -20,6 +20,15 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
+curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/stable/InstallHalyard.sh
+sudo bash InstallHalyard.sh
+
+hal -v 
+
+
+sudo apt-get install git -y
+
+
 
 
 
