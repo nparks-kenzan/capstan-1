@@ -50,7 +50,7 @@ echo "======= Time to be Gangsta ========"
 kubectl apply -f jenkins/k8s/
 
 echo "Pausing"
-sleep 30
+sleep 60
 
 ## we need to do a watch here
 kubectl get pods --namespace $JENKINS_NS
