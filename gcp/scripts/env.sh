@@ -1,7 +1,7 @@
 
 
 
-############################################# GCP / GKE / Jenkins
+############################################# GCP / GKE 
 
 #### Where are We
 ZONE=us-central1-a
@@ -10,14 +10,14 @@ OTHER_ZONES=""
 
 #### Expected JenkinsSpinnakerClusterName Cluster Name
 CLUSTER_NAME=spinnakerjenkins
-HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gcr"
+HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 #There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
 NODE_PER_ZONE=3
 
 #cloud storage location
 BUCKET_LOCATION=us
 
-
+############################################### Jenkins
 
 ##### TLS Paths if you have them enter them here and comment out line in create_jenkins.sh otherwise the files will be created at this locations
 TLS_CERT="certificate.crt"
@@ -36,8 +36,9 @@ SERVICE_ACCOUNT_NAME=spinnaker-gcr-account
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
 REGISTRY_NAME=imagerepository
 
-DOCKER_HUB_ADDR="netflixoss/eureka/ netflixoss/zuul"
-DOCKER_REPO="index.docker.io"
+DOCKER_HUB_NAME="dockerhubimagerepository"
+DOCKER_REPO="netflixoss/eureka/ netflixoss/zuul"
+DOCKER_ADDR="index.docker.io"
 
 OMIT_NAMESPACES=$JENKINSNS
 
