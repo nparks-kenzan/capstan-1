@@ -45,25 +45,30 @@ PASSWORD_FILE=$SERVICE_ACCOUNT_DEST
 
 echo "==== -> Let's Get Halyard Configuration Going"
 
-hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
+hal config version edit --version $SPINNAKER_VERSION
 
-hal config storage gcs edit --project $PROJECT --bucket-location $BUCKET_LOCATION --json-path $SERVICE_ACCOUNT_DEST
+hal config storage gcs edit --project $PROJECT_NAME --bucket-location $BUCKET_LOCATION --json-path $SERVICE_ACCOUNT_DEST
 
 hal config storage edit --type gcs
 
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
-hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --repositories $REPOSITORIES --username $USERNAME --password-file $PASSWORD_FILE
+#hal config provider docker-registry enable
 
-hal config provider docker-registry enable
+hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
+
 
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
+CONTEXT_prefix="gke_"
+CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME --docker-registries $REGISTRY_NAME --omit-namespaces $OMIT_NAMESPACES --kubeconfig-file $KUBECONFIG
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $REGISTRY_NAME --kubeconfig-file $KUBECONFIG
+
+hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
 hal config provider kubernetes enable
 

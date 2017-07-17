@@ -34,12 +34,15 @@ JENKINS_SAVED_PW=JenkinsPassword.txt
 ADDRESS=gcr.io
 SERVICE_ACCOUNT_NAME=spinnaker-gcr-account
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
-REGISTRY_NAME=ImageRepository
+REGISTRY_NAME=imagerepository
+
+DOCKER_HUB_ADDR="netflixoss/eureka/ netflixoss/zuul"
+DOCKER_REPO="index.docker.io"
 
 OMIT_NAMESPACES=$JENKINSNS
 
 # we are assuming that glcoud credentials where added properly
-KUBECONFIG="~/.kube/config"
+KUBECONFIG=".kube/config"
 
 #OAUTH2_CLIENT_SECRET=X
 #OAUTH2_CLIENT_ID=y
