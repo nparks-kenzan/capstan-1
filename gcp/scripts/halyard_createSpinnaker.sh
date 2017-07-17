@@ -19,17 +19,9 @@ echo "=========================================="
 echo " - Let's Get this Halyard Thing Together -"
 echo "=========================================="
 
-PROJECT=$(gcloud info --format='value(config.project)')
+PROJECT_NAME=$(gcloud info --format='value(config.project)')
+gcloud config set compute/zone $ZONE
 
-
-echo "==== -> Let's Get Halyard on this box"
-
-curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/stable/InstallHalyard.sh
-
-sudo bash InstallHalyard.sh
-
-
-hav -v 
 
 echo "==== -> Let's Get a service account created"
 
@@ -38,7 +30,7 @@ gcloud iam service-accounts create  $SERVICE_ACCOUNT_NAME --display-name $SERVIC
 
 SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOUNT_NAME" --format='value(email)')
 
-gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$SA_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL
 
 
 mkdir -p $(dirname $SERVICE_ACCOUNT_DEST)
