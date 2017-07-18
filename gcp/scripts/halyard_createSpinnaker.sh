@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##########################
-# Kenzan LLC Create Spinnaker
+# Kenzan LLC -> Create Spinnaker
 # 
 ## Can your GCP Service Account do this?
 ## Did you create Jenkins in GKE first?
@@ -85,6 +85,9 @@ hal config provider kubernetes enable
 echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
+
+hal config security authn oauth2 enable
+
 
 hal config security api ssl disable
 hal config security ui ssl disable

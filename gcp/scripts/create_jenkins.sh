@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##########################
-# Kenzan LLC Jenkins on Existing GKE
+# Kenzan LLC -> Jenkins on Existing GKE
 # 
 # Can your GCP Service Account do this?
 # Did you create the GKE environment first?
