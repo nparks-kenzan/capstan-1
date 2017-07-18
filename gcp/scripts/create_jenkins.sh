@@ -84,6 +84,12 @@ cd ../
 echo  $PASSWORD > $JENKINS_SAVED_PW
 #echo JENKINS ADDRESS > $JENKINS_IP
 
+echo "Waiting for Jenkins Backend Services to report healthy"
+
+#watch --interval 20 --no-title "! kubectl describe ingress $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"HEALTHY\""
+#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
+
+
 kubectl describe ingress jenkins --namespace $JENKINS_NS
 
 echo "=========================================="
