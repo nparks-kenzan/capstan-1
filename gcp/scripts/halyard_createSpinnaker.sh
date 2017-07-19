@@ -23,7 +23,6 @@ echo "=========================================="
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
 gcloud config set compute/zone $ZONE
 
-
 echo "==== -> Let's Get a service account created"
 
 
@@ -56,6 +55,12 @@ hal config storage edit --type gcs
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
+### BS to make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608 
+docker pull nginx
+docker tag nginx:latest $ADDRESS/$PROJECT_NAME/nginx
+gcloud docker -- push $ADDRESS/$PROJECT_NAME/nginx
+#### end BS
+
 hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
 hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO 
 hal config provider docker-registry enable
@@ -69,13 +74,13 @@ kubectl config set-cluster spinjen_srv --server=$GKE_URL  --insecure-skip-tls-ve
 kubectl config set-credentials spinjen_user --username admin --password $GKE_PASSWORD
 kubectl config set-context spinjen_context --cluster=spinjen_srv --user=spinjen_user
 kubectl config use-context spinjen_context
-
+CONTEXT=spinjen_context
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 
-IMAGE_REPOS="$REGISTRY_NAME $DOCKER_HUB_NAME"
+IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES --kubeconfig-file $KUBECONFIG
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES 
 
 hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
@@ -84,17 +89,18 @@ hal config provider kubernetes enable
 # Let's turn some SSL stuff off at the moment
 echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
-hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
+#hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
 
-hal config security authn oauth2 enable
+#hal config security authn oauth2 enable
 
 
-hal config security api ssl disable
-hal config security ui ssl disable
+#hal config security api ssl disable
+#hal config security ui ssl disable
 
 echo "==== -> Remember Jenkins"
 
-JENKINS_PW=`cat $JENKINS_SAVED_PW`
+#JENKINS_PW=`cat $JENKINS_SAVED_PW`
+#JENKINS_IP="35.190.17.84"
 
 #hal config ci jenkins master add MASTER --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password $JENKINS_PW
 #hal config ci jenkins enable
@@ -105,7 +111,7 @@ hal deploy diff > deploy_diff.txt
 
 
 echo "======= Time to be Gangsta, this will take a while  ========"
-sudo hal deploy apply
+hal deploy apply
 
 
 echo "=========================================="
