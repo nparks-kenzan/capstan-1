@@ -99,7 +99,7 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 echo "==== -> Remember Jenkins"
 
 #JENKINS_PW=`cat $JENKINS_SAVED_PW`
-#JENKINS_IP="35.186.210.65"
+#JENKINS_IP=`cat $JENKINS_SAVED_IP`
 
 #hal config ci jenkins master add MASTER --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password $JENKINS_PW
 #hal config ci jenkins enable

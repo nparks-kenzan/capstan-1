@@ -25,6 +25,7 @@ JENKINSNS="jenkins"
 #only used for spinnaker configuration
 JENKINS_ADMIN_USER="admin"
 JENKINS_SAVED_PW=JenkinsPassword.txt
+JENKINS_SAVED_IP=JenkinsIP.txt
 
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
