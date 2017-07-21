@@ -52,11 +52,9 @@ kubectl create secret generic jenkins --from-file=jenkins/k8s/options --namespac
 echo "**********======= Time to be Gangsta ========***************"
 kubectl apply -f jenkins/k8s/
 
-echo "========Pausing========="
+echo "========Waiting for Happy Pods========="
 sleep 60
-## we need to do a watch here for 1/1
-#watch --interval 20 --no-title "! kubectl get pods $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"1/1\""
-##until kubectl get pods jenkins --namespace $JENKINS_NS | grep -m 1 "1/1"; do sleep 10 ; done
+until kubectl get pods --namespace $JENKINS_NS | grep -m 1 "1/1"; do sleep 10 ; done
 kubectl get pods --namespace $JENKINS_NS
 
 
@@ -76,10 +74,7 @@ kubectl apply -f jenkins/k8s/lb
 cd ../
 
 echo "=== Waiting for Jenkins Backend Services to report healthy ===="
-
-#watch --interval 20 --no-title "! kubectl describe ingress $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"HEALTHY\""
-#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep  -E "HEALHTY" -m 1; do sleep 10 ; done
-
+until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep "HEALTHY"; do sleep 10; done
 kubectl describe ingress jenkins --namespace $JENKINS_NS
 
 JENKINS_ADDRESS=`kubectl get ingress jenkins  --namespace $JENKINS_NS | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
