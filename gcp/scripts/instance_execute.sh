@@ -36,8 +36,9 @@ hal -v
 
 ### get git
 sudo apt-get install git -y
-#### do some API enable
 
+#### this is not a version you would want to use but it get's the job done
+sudo apt-get install -y docker.io
 
 echo "=====  If asked a question say yes (y) ====="
 
