@@ -56,12 +56,9 @@ echo "========Pausing========="
 sleep 60
 ## we need to do a watch here for 1/1
 #watch --interval 20 --no-title "! kubectl get pods $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"1/1\""
-##until kubectl get pods jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
+##until kubectl get pods jenkins --namespace $JENKINS_NS | grep -m 1 "1/1"; do sleep 10 ; done
 kubectl get pods --namespace $JENKINS_NS
-echo ""
-echo "==============================================================="
-echo ""
-kubectl get svc --namespace jenkins
+
 
 echo "============TLS Time=============="
 
@@ -75,27 +72,23 @@ sleep 5
 
 kubectl apply -f jenkins/k8s/lb
 
-
-echo "============Pausing  before reporting cluster info========"
-sleep 10
-kubectl cluster-info 
-
-
 #return
 cd ../
-
-echo  $PASSWORD > $JENKINS_SAVED_PW
-#echo JENKINS ADDRESS > $JENKINS_IP
 
 echo "=== Waiting for Jenkins Backend Services to report healthy ===="
 
 #watch --interval 20 --no-title "! kubectl describe ingress $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"HEALTHY\""
-#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
+#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep  -E "HEALHTY" -m 1; do sleep 10 ; done
 
 kubectl describe ingress jenkins --namespace $JENKINS_NS
 
+JENKINS_ADDRESS=`kubectl get ingress jenkins  --namespace $JENKINS_NS | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
+
+echo JENKINS_ADDRESS > $JENKINS_IP
+echo  $PASSWORD > $JENKINS_SAVED_PW
+
 echo "=========================================="
-echo " - Jenkins Thing Together -"
+echo " - Jenkins with $PASSWORD at $JENKINS_ADDRESS -"
 echo "=========================================="
 echo "******************************************"
 
