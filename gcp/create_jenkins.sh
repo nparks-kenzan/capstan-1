@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 ##########################
-# Kenzan LLC -> Jenkins on Existing GKE
+# Kenzan LLC Jenkins on Existing GKE
 # 
 # Can your GCP Service Account do this?
-# Did you create the GKE environment first?
 #
 # nparks@kenzan.com
 ##########################
@@ -28,8 +27,6 @@ echo "=========================================="
 kubectl create ns $JENKINS_NS
 
 gcloud config set compute/zone $ZONE
-
-echo "======= Creating Jenkins Dsk ========"
 gcloud compute images create $JENKINS_IMAGE --source-uri $JENKINS_IMG_TGZ
 gcloud compute disks create $JENKINS_DSK --image $JENKINS_IMAGE
 
@@ -40,28 +37,27 @@ cd continuous-deployment-on-kubernetes
 
 
 PASSWORD=`openssl rand -base64 15`
-echo "==============================================================="
+echo "==================================="
 echo "Your Jenkins password is $PASSWORD"
-echo "It is also located in $JENKINS_SAVED_PW when process completes"
-echo "=============================================================="
+echo "==================================="
 sed -i.bak s#CHANGE_ME#$PASSWORD# jenkins/k8s/options
 
 
 kubectl create secret generic jenkins --from-file=jenkins/k8s/options --namespace=$JENKINS_NS
 
-echo "**********======= Time to be Gangsta ========***************"
+echo "======= Time to be Gangsta ========"
 kubectl apply -f jenkins/k8s/
 
-echo "========Pausing========="
-sleep 60
-## we need to do a watch here for 1/1
-#watch --interval 20 --no-title "! kubectl get pods $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"1/1\""
-##until kubectl get pods jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
+echo "Pausing"
+sleep 30
+
+## we need to do a watch here
 kubectl get pods --namespace $JENKINS_NS
-echo ""
-echo "==============================================================="
-echo ""
+
+
+
 kubectl get svc --namespace jenkins
+
 
 echo "============TLS Time=============="
 
@@ -76,9 +72,9 @@ sleep 5
 kubectl apply -f jenkins/k8s/lb
 
 
-echo "============Pausing  before reporting cluster info========"
+echo "Pausing  before reporting cluster info"
 sleep 10
-kubectl cluster-info 
+kubectl cluster-info --namespace $JENKINS_NS
 
 
 #return
@@ -86,11 +82,6 @@ cd ../
 
 echo  $PASSWORD > $JENKINS_SAVED_PW
 #echo JENKINS ADDRESS > $JENKINS_IP
-
-echo "=== Waiting for Jenkins Backend Services to report healthy ===="
-
-#watch --interval 20 --no-title "! kubectl describe ingress $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"HEALTHY\""
-#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
 
 kubectl describe ingress jenkins --namespace $JENKINS_NS
 
