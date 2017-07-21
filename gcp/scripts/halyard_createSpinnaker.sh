@@ -70,11 +70,6 @@ hal config provider docker-registry enable
 #CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
 
-#kubectl config set-cluster spinjen_srv --server=$GKE_URL  --insecure-skip-tls-verify=true
-#kubectl config set-credentials spinjen_user --username admin --password $GKE_PASSWORD
-#kubectl config set-context spinjen_context --cluster=spinjen_srv --user=spinjen_user
-#kubectl config use-context spinjen_context
-#CONTEXT=spinjen_context
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
