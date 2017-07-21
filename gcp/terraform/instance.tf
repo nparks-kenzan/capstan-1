@@ -49,7 +49,7 @@ resource "google_compute_instance" "halyardtunnel" {
     provisioner "remote-exec" {
     inline = [
   		"chmod +x /tmp/terraform/*.sh",
-  		"/tmp/terraform/test.sh"
+  		"/tmp/terraform/instance_execute.sh"
   	]
   }
 }
