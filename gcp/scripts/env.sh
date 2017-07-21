@@ -9,7 +9,7 @@ ZONE=us-central1-a
 #FIXME do not use other zones yet
 OTHER_ZONES=""
 #### Expected JenkinsSpinnakerClusterName Cluster Name
-CLUSTER_NAME=spinnakerjenkins
+CLUSTER_NAME=cdci-container-runtime
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 #There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
 NODE_PER_ZONE=3

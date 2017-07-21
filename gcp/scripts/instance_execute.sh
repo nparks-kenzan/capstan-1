@@ -46,6 +46,12 @@ SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$TOOLS_SERVICE
 THROW_AWAY_VAR=$(gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL)
 
 
+echo "************ calling children *********"
+
+./create_GKE.sh
+./create_jenkins.sh
+
+
 echo "=========================================="
 echo " - Configuration Set-up Complete -"
 echo "=========================================="
