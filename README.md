@@ -3,13 +3,14 @@ Tools for creating Spinnaker demo environments
 
 ![Capstan Image](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Star_of_India_capstan_1.JPG/320px-Star_of_India_capstan_1.JPG)
 
-What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical)) .... That big rope...is a Halyard - ZING!
+What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical)) .... That big rope...it is a Halyard - ZING!
 
-Anyway if you are here you are interested in
+Anyway if you are here you are interested in:
 - Using Kubernettes
 - Using Spinnaker
 - Using Jenkins
 - Not wanting to figureout how to set all that up yourself on some IaaS
+- Just want to deploy containerized apps without all the fuss of doing all that set-up
 
 
 ## Google Cloud Platform
