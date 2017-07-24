@@ -35,13 +35,7 @@ sudo apt-get install git -y
 #### this is not a version you would want to use but it will get the job done
 sudo apt-get install -y docker.io
 
-
-echo "************ calling children *********"
-
-./create_GKE.sh
-./create_jenkins.sh
-
-
+echo $PWD
 echo "=========================================="
 echo " - Configuration Set-up Complete -"
 echo "=========================================="
