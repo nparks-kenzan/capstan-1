@@ -12,7 +12,7 @@ zone = "a"
 
 ### Project Info
 #
-gcp_project_id = "spinnaker-bke-demo-phase1"
+gcp_project_id = "CHANGE ME"
 created_by = "kenzan-capstan"
 
 
