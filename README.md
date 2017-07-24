@@ -12,6 +12,7 @@ Anyway if you are here you are interested in:
 - Not wanting to figureout how to set all that up yourself on some IaaS
 - Just want to deploy containerized apps without all the fuss of doing all that set-up
 
+Oh, we have a solution for you!
 
 ## Google Cloud Platform
 
@@ -26,8 +27,8 @@ Essentially, from your workstation you are using TerraForm to create a service a
 ### Prerequisites
 
 1. Do you have a computer (Mac Preferred)
-1. Do you have a Kenzan Issued GCP project for this?
-  1. See Confluence here about that.
+1. Do you have a GCP project for this?
+   1. See Confluence here about that.
 1. Do you have [Terraform](https://www.terraform.io/) Installed?
 1. Do you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed?
 1. Do you have [GCLOUD SDK](https://cloud.google.com/sdk/downloads) installed?
@@ -39,6 +40,7 @@ That's it
 1. Make sure you have followed the validation process described [here](./gcp/README.md)
 1. git clone this repo (fork from your own if you like)
 1. cd to the `gcp\terraform`
+   1. optionally edit values in `env.sh`
 1. Execute `terraform apply`
 1. Go to the bathroom / lunch / another meeting
 1. Hope for the best
