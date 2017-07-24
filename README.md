@@ -28,7 +28,6 @@ Essentially, from your workstation you are using TerraForm to create a service a
 
 1. Do you have a computer (Mac Preferred)
 1. Do you have a GCP project for this?
-   1. See Confluence here about that.
 1. Do you have [Terraform](https://www.terraform.io/) Installed?
 1. Do you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed?
 1. Do you have [GCLOUD SDK](https://cloud.google.com/sdk/downloads) installed?
