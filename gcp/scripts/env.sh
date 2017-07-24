@@ -9,7 +9,7 @@ ZONE=us-central1-a
 #FIXME do not use other zones yet
 OTHER_ZONES=""
 #### Expected JenkinsSpinnakerClusterName Cluster Name
-CLUSTER_NAME=cdci-container-runtime
+CLUSTER_NAME=cdci-runtime
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 #There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
 NODE_PER_ZONE=3
@@ -29,7 +29,7 @@ JENKINS_SAVED_IP=JenkinsIP.txt
 
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
-SERVICE_ACCOUNT_NAME=spinnaker-gcr-account
+SERVICE_ACCOUNT_NAME=spinnaker-gcr
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
 REGISTRY_NAME=imagerepository
 SPINNAKER_VERSION="1.1.0"
