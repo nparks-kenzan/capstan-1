@@ -9,8 +9,8 @@
 # nparks@kenzan.com
 ##########################
 ###
-source ./env.sh
-source ./k8_oauth.sh
+source $PWD/env.sh
+source $PWD/k8_oauth.sh
 
 
 ####
@@ -93,10 +93,12 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 echo "==== -> Remember Jenkins"
 
-#JENKINS_PW=`cat $JENKINS_SAVED_PW`
-#JENKINS_IP=`cat $JENKINS_SAVED_IP`
+JENKINS_PW=`cat $JENKINS_SAVED_PW`
+JENKINS_IP=`cat $JENKINS_SAVED_IP`
 
-#hal config ci jenkins master add MASTER --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password $JENKINS_PW
+#fixme
+#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER 
+#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password < echo $JENKINS_PW
 #hal config ci jenkins enable
 
 echo "==== -> Let's Diff our Deployment real quick"
