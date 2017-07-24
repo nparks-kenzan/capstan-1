@@ -32,24 +32,18 @@ resource "google_compute_instance" "halyardtunnel" {
     }
   }
 
-
-	provisioner "remote-exec" {
-    inline = [
-  		"mkdir -p /tmp/terraform/"
-    ]
-  }
-
-
     provisioner "file" {
   	source = "../scripts/"
-    destination = "/tmp/terraform"
+    destination = "/home/${var.ssh_user}"
   }
 
 
     provisioner "remote-exec" {
     inline = [
-  		"chmod +x /tmp/terraform/*.sh",
-  		"/tmp/terraform/instance_execute.sh"
+  		"chmod +x /home/${var.ssh_user}/*.sh",
+  		"/home/${var.ssh_user}/instance_execute.sh",
+      "/home/${var.ssh_user}/create_GKE.sh",
+      "/home/${var.ssh_user}/create_jenkins.sh"
   	]
   }
 }
