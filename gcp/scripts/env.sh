@@ -29,10 +29,10 @@ JENKINS_SAVED_IP=JenkinsIP.txt
 
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
-SERVICE_ACCOUNT_NAME=spinnaker-gcr
+SERVICE_ACCOUNT_NAME=gcr-spinnaker
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
 REGISTRY_NAME=imagerepository
-SPINNAKER_VERSION="1.1.0"
+SPINNAKER_VERSION="1.1.1"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
 DOCKER_REPO="netflixoss/eureka netflixoss/zuul consul vault owasp/zap2docker-stable"
