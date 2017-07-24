@@ -4,7 +4,7 @@
 # Kenzan LLC Script to Validate Project settings
 # 
 # Do you have a powerfull enough service account to do this stuff?
-# THis is to run from the google cloud shell
+# This is to make sure that a GCP instance can make the appropiate system calls
 #
 # nparks@kenzan.com
 ##########################
