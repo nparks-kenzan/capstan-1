@@ -35,7 +35,7 @@ REGISTRY_NAME=imagerepository
 SPINNAKER_VERSION="1.1.1"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
-DOCKER_REPO="netflixoss/eureka netflixoss/zuul consul vault owasp/zap2docker-stable"
+DOCKER_REPO="netflixoss/eureka netflixoss/zuul owasp/zap2docker-stable"
 DOCKER_ADDR="index.docker.io"
 
 OMIT_NAMESPACES=$JENKINSNS
