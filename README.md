@@ -44,7 +44,7 @@ That's it
 1. Go to the bathroom / lunch / another meeting
 1. Hope for the best
 
-When this is Done you SSH tunnel
+When this is done you will create an SSH tunnel to Spinnaker. More details of this process is documted [here](./gcp/README.md)
 
 
 ## Amazon Web Services

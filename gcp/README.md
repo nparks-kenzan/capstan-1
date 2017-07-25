@@ -1,13 +1,8 @@
 # GCP - GKE
 
-This Folder contains the scripts and the terraform needed to create a Continuous Delivery with Continuous Integration environment featuring both Spinnaker and Jenkins both running in GKE
+This Folder contains the scripts and the terraform needed to create a Continuous Delivery with Continuous Integration environment featuring  Spinnaker and Jenkins both running in GKE. This is about delivering container based apps, if you want to muck around with GCE go [elsewhere](https://github.com/GoogleCloudPlatform/spinnaker-deploymentmanager).  
 
-## What Am I getting into?
-
-
-
-If you have an afternoon to burn I would recommend auditing a course course
-
+If you have no idea how to even use GCP I would recommend a [coursera course] (https://www.coursera.org/learn/gcp-infrastructure-foundation)
 
 ## Let's Get Started
 
@@ -15,16 +10,20 @@ You need to validate your GCP project and make sure terraform can do what it nee
 
 ### Validate your GCP project
 
-
-
-
-You no longer need this test instance. You can delete it. 
+To make sure we don't stumble into problems later, you need to perform the following:
+1. Create a [Service accoun](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Maybe call it `terraform-admin`
+1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
+1. from your laptop perform a `gcloud ssh` into said instance
+   1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
+1. Run the [script]() on that instance that will do some api calls this process will execute
+ 
+If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account with terraform.
 
 ### Set-up Terraform
 
 If you were able to perform the final ssh option with gcloud you inadvertently performed most of the prep to enable terraform to work on your Google Project.
 
-#### Terraform GCP Credentials
+#### Configure Terraform GCP Credentials
 Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file. 
 
 **Procedure**
@@ -34,7 +33,7 @@ Terraform needs credentials to perform administrator level operations. To do thi
 1. Clicking "Create" will download your credentials.
 1. Move/rename the json file to `gcp-account.json` and place in the folder with the other terraform scripts
 
-#### Terraform SSH
+#### Configure Terraform SSH
 
 Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there. 
 
@@ -46,6 +45,7 @@ FINALLY....
 At this point, you need to change directory into the terraform folder and  type:
 
 `terraform plan`
+
 it will prompt you for the ssh username and will then show you the actions that it is going to attempt. If you agree with the plan...
 
 `terraform apply` and enter the ssh user name again. 
