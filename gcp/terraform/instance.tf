@@ -43,7 +43,8 @@ resource "google_compute_instance" "halyardtunnel" {
   		"chmod +x /home/${var.ssh_user}/*.sh",
   		"/home/${var.ssh_user}/instance_execute.sh",
       "/home/${var.ssh_user}/create_GKE.sh",
-      "/home/${var.ssh_user}/create_jenkins.sh"
+      "/home/${var.ssh_user}/create_jenkins.sh",
+      "/home/${var.ssh_user}/halyard_createSpinnaker.sh"
   	]
   }
 }
