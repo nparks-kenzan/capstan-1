@@ -8,7 +8,7 @@
 #
 # nparks@kenzan.com
 ##########################
-source ./env.sh
+source $PWD/env.sh
 
 ### GLOBAL ENV ####
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
@@ -33,10 +33,11 @@ echo "======= Creating Jenkins Dsk ========"
 gcloud compute images create $JENKINS_IMAGE --source-uri $JENKINS_IMG_TGZ
 gcloud compute disks create $JENKINS_DSK --image $JENKINS_IMAGE
 
+HOME_DIR=$PWD
 # Okay, time to Steal from Google
 git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes
 #we need leverage  stuff that is in here
-cd continuous-deployment-on-kubernetes
+cd $PWD/continuous-deployment-on-kubernetes
 
 
 PASSWORD=`openssl rand -base64 15`
@@ -44,58 +45,46 @@ echo "==============================================================="
 echo "Your Jenkins password is $PASSWORD"
 echo "It is also located in $JENKINS_SAVED_PW when process completes"
 echo "=============================================================="
-sed -i.bak s#CHANGE_ME#$PASSWORD# jenkins/k8s/options
+sed -i.bak s#CHANGE_ME#$PASSWORD# $PWD/jenkins/k8s/options
 
 
-kubectl create secret generic jenkins --from-file=jenkins/k8s/options --namespace=$JENKINS_NS
-
+kubectl create secret generic jenkins --from-file=$PWD/jenkins/k8s/options --namespace=$JENKINS_NS
+sleep 10
 echo "**********======= Time to be Gangsta ========***************"
-kubectl apply -f jenkins/k8s/
+kubectl apply -f $PWD/jenkins/k8s/
 
-echo "========Pausing========="
+echo "========Waiting for Happy Pods========="
 sleep 60
-## we need to do a watch here for 1/1
-#watch --interval 20 --no-title "! kubectl get pods $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"1/1\""
-##until kubectl get pods jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
+until kubectl get pods --namespace $JENKINS_NS | grep -m 1 "1/1"; do sleep 10 ; done
 kubectl get pods --namespace $JENKINS_NS
-echo ""
-echo "==============================================================="
-echo ""
-kubectl get svc --namespace jenkins
+
 
 echo "============TLS Time=============="
 
 ### comment out below if you have supplied your own
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $TLS_KEY -out $TLS_CERT -subj "/CN=jenkins/O=jenkins"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $PWD/$TLS_KEY -out $PWD/$TLS_CERT -subj "/CN=jenkins/O=jenkins"
 
-kubectl create secret generic tls --from-file=$TLS_CERT --from-file=$TLS_KEY --namespace $JENKINS_NS
+kubectl create secret generic tls --from-file=$PWD/$TLS_CERT --from-file=$PWD/$TLS_KEY --namespace $JENKINS_NS
 
 #create gap in logs
-sleep 5
-
-kubectl apply -f jenkins/k8s/lb
-
-
-echo "============Pausing  before reporting cluster info========"
 sleep 10
-kubectl cluster-info 
 
+kubectl apply -f $PWD/jenkins/k8s/lb
 
 #return
-cd ../
-
-echo  $PASSWORD > $JENKINS_SAVED_PW
-#echo JENKINS ADDRESS > $JENKINS_IP
+cd $HOME_DIR
 
 echo "=== Waiting for Jenkins Backend Services to report healthy ===="
-
-#watch --interval 20 --no-title "! kubectl describe ingress $JENKINS_NS --namespace $JENKINS_NS | grep -m 1 \"HEALTHY\""
-#until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep -m 1 "HEALHTY"; do sleep 10 ; done
-
+until kubectl describe ingress jenkins --namespace $JENKINS_NS | grep "HEALTHY"; do sleep 10; done
 kubectl describe ingress jenkins --namespace $JENKINS_NS
 
+JENKINS_ADDRESS=`kubectl get ingress jenkins  --namespace $JENKINS_NS | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
+
+echo $JENKINS_ADDRESS > $PWD/$JENKINS_SAVED_IP
+echo  $PASSWORD > $PWD/$JENKINS_SAVED_PW
+
 echo "=========================================="
-echo " - Jenkins Thing Together -"
+echo " - Jenkins with $PASSWORD at $JENKINS_ADDRESS -"
 echo "=========================================="
 echo "******************************************"
 

@@ -9,8 +9,8 @@
 # nparks@kenzan.com
 ##########################
 ###
-source ./env.sh
-source ./k8_oauth.sh
+source $PWD/env.sh
+#source $PWD/k8_oauth.sh
 
 
 ####
@@ -56,9 +56,9 @@ hal config storage edit --type gcs
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
 ### BS to make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608 
-docker pull nginx
-docker tag nginx:latest $ADDRESS/$PROJECT_NAME/nginx
-gcloud docker -- push $ADDRESS/$PROJECT_NAME/nginx
+sudo docker pull nginx
+sudo docker tag nginx:latest $ADDRESS/$PROJECT_NAME/nginx
+sudo gcloud docker -- push $ADDRESS/$PROJECT_NAME/nginx
 #### end BS
 
 hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
@@ -70,11 +70,6 @@ hal config provider docker-registry enable
 #CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
 
-#kubectl config set-cluster spinjen_srv --server=$GKE_URL  --insecure-skip-tls-verify=true
-#kubectl config set-credentials spinjen_user --username admin --password $GKE_PASSWORD
-#kubectl config set-context spinjen_context --cluster=spinjen_srv --user=spinjen_user
-#kubectl config use-context spinjen_context
-#CONTEXT=spinjen_context
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
@@ -98,10 +93,12 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 echo "==== -> Remember Jenkins"
 
-#JENKINS_PW=`cat $JENKINS_SAVED_PW`
-#JENKINS_IP=`cat $JENKINS_SAVED_IP`
+JENKINS_PW=`cat $JENKINS_SAVED_PW`
+JENKINS_IP=`cat $JENKINS_SAVED_IP`
 
-#hal config ci jenkins master add MASTER --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password $JENKINS_PW
+#fixme
+#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER 
+#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password < echo $JENKINS_PW
 #hal config ci jenkins enable
 
 echo "==== -> Let's Diff our Deployment real quick"

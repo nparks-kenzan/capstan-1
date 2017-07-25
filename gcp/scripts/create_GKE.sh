@@ -8,7 +8,7 @@
 # nparks@kenzan.com
 ##########################
 ###
-source ./env.sh
+source $PWD/env.sh
 
 
 echo "******************************************"
@@ -30,7 +30,7 @@ gcloud container clusters get-credentials $CLUSTER_NAME
 kubectl cluster-info 
 
 ## this is where we need to do a watch command to see what the status of the cluster is
-
+sleep 60
 echo "=========================================="
 echo " - GKE Thing Together -"
 echo "=========================================="

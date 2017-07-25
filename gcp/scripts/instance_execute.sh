@@ -10,17 +10,12 @@
 ##########################
 ###
 
-TOOLS_SERVICE_ACCOUNT_NAME=super-halyard
-
-
 echo "******************************************"
 echo "=========================================="
 echo " - Starting CD Environment Creation Process -"
 echo "=========================================="
 
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
-
-
 
 ### We need to get kubectl instead of having gloud install it for us
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
@@ -36,16 +31,11 @@ hal -v
 
 ### get git
 sudo apt-get install git -y
-#### do some API enable
 
+#### this is not a version you would want to use but it will get the job done
+sudo apt-get install -y docker.io
 
-echo "=====  If asked a question say yes (y) ====="
-
-SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$TOOLS_SERVICE_ACCOUNT_NAME" --format='value(email)')
-
-THROW_AWAY_VAR=$(gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL)
-
-
+echo $PWD
 echo "=========================================="
 echo " - Configuration Set-up Complete -"
 echo "=========================================="
