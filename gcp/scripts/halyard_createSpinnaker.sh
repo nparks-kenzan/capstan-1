@@ -80,7 +80,7 @@ hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAM
 
 hal config provider kubernetes enable
 
-# Let's turn some SSL stuff off at the moment
+
 echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 #hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
@@ -90,6 +90,8 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 ##### if we are TLS terminating at load balancer
 #hal config security api ssl disable
 #hal config security ui ssl disable
+
+#### we also need to update the base urls
 
 echo "==== -> Remember Jenkins"
 
@@ -112,6 +114,8 @@ hal deploy apply
 
 echo "=========================================="
 echo " - Hopefully there is a Spinnaker -"
+echo " - Tunnel to halyard-tunnel and"
+echo " - then run halyard deploy connect"
 echo "=========================================="
 echo "******************************************"
 
