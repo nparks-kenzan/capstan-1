@@ -6,12 +6,12 @@ If you have no idea how to even use GCP I would recommend a [coursera course](ht
 
 ## Let's Get Started
 
-You need to validate your GCP project and make sure terraform can do what it needs to do. Before we validate, make sure you have git installed, gcloud sdk installed, and terraform installed. All of these items need to be in your path.
+You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
 
 ### Validate your GCP project
 
 To make sure we don't stumble into problems later, you need to perform the following:
-1. Create a [Service accoun](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Maybe call it `terraform-admin`
+1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Maybe call it `terraform-admin`
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
 1. from your laptop perform a `gcloud ssh` into said instance
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
@@ -42,7 +42,7 @@ The last value to change is called `gcp_project_id` located in [here](./terrafor
 
 FINALLY....
 
-At this point, you need to change directory into the terraform folder and  type:
+At this point, you need to change directory into the terraform folder and type:
 
 `terraform plan`
 
