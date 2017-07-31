@@ -67,7 +67,7 @@ hal config provider docker-registry enable
 
 #echo "==== -> NoneSense Kubectl fix"
 
-#CONTEXT_prefix="gke_"
+CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
@@ -80,30 +80,32 @@ hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAM
 
 hal config provider kubernetes enable
 
-# Let's turn some SSL stuff off at the moment
+
 echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 #hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
 
 #hal config security authn oauth2 enable
 
-
+##### if we are TLS terminating at load balancer
 #hal config security api ssl disable
 #hal config security ui ssl disable
 
+#### we also need to update the base urls
+
 echo "==== -> Remember Jenkins"
 
-JENKINS_PW=`cat $JENKINS_SAVED_PW`
-JENKINS_IP=`cat $JENKINS_SAVED_IP`
+JENKINS_PW=`cat $PWD/$JENKINS_SAVED_PW`
+JENKINS_IP=`cat $PWD/$JENKINS_SAVED_IP`
 
-#fixme
-#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER 
-#hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password < echo $JENKINS_PW
-#hal config ci jenkins enable
+H_CMD="hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password"
+echo $JENKINS_PW | $H_CMD
+
+hal config ci jenkins enable
 
 echo "==== -> Let's Diff our Deployment real quick"
 
-hal deploy diff > deploy_diff.txt
+hal deploy diff 
 
 
 echo "======= Time to be Gangsta, this will take a while  ========"
@@ -112,6 +114,8 @@ hal deploy apply
 
 echo "=========================================="
 echo " - Hopefully there is a Spinnaker -"
+echo " - Tunnel to halyard-tunnel and"
+echo " - then run halyard deploy connect"
 echo "=========================================="
 echo "******************************************"
 

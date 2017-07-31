@@ -15,6 +15,8 @@ echo "=========================================="
 echo " - Starting CD Environment Creation Process -"
 echo "=========================================="
 
+sudo apt-get update
+
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
 
 ### We need to get kubectl instead of having gloud install it for us
@@ -31,6 +33,10 @@ hal -v
 
 ### get git
 sudo apt-get install git -y
+
+#### We need expect also
+#sudo apt-get install expect -y
+
 
 #### this is not a version you would want to use but it will get the job done
 sudo apt-get install -y docker.io

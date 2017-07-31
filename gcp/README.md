@@ -8,6 +8,8 @@ If you have no idea how to even use GCP I would recommend a [coursera course](ht
 
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
 
+So git clone this project (or your own fork of it) and with your favorite command shell navigate to the the `gcp` folder
+
 ### Validate your GCP project
 
 To make sure we don't stumble into problems later, you need to perform the following:
@@ -38,7 +40,7 @@ Terraform needs credentials to perform administrator level operations. To do thi
 Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there. 
 
 ### You are ready to begin
-The last value to change is called `gcp_project_id` located in [here](./terraform/terraform.tfvars). This is the project we have been using. You can optionally remove the entire variable and have terraform as you for it at the command line. 
+ 
 
 FINALLY....
 
@@ -46,9 +48,9 @@ At this point, you need to change directory into the terraform folder and type:
 
 `terraform plan`
 
-it will prompt you for the ssh username and will then show you the actions that it is going to attempt. If you agree with the plan...
+it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
-`terraform apply` and enter the ssh user name again. 
+`terraform apply` and enter the ssh user name and project id again. 
 
 Now, wait 30 minutes. 
 
@@ -80,9 +82,14 @@ gcloud compute --project "[PROJECT_NAME]" ssh --zone "[THE ZONE YOU DEPLOYED TOO
 
 Once there you will then perform `halyard deploy connect`
 
-If this works, navigating to `http://localhost:9000/` should give you the spinnaker interface. 
+If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface. 
 
 So that would be **check #2**
 
 Done!
 
+
+If you want acccess to the K8 user experince:
+- gcloud container clusters get-credentials [name GKE cluster]
+- kubectl proxy
+- open `http://localhost:8001/ui` in a browser and you should the K8 web console
