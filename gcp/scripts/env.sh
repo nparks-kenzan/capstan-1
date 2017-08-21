@@ -27,6 +27,10 @@ JENKINS_ADMIN_USER="admin"
 JENKINS_SAVED_PW=JenkinsPassword.txt
 JENKINS_SAVED_IP=JenkinsIP.txt
 
+JENKINS_PORT="8080"
+JENKINS_NAMESPACE=$JENKINSNS
+JENKINS_HELM_RELEASENAME="ci"
+
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
 SERVICE_ACCOUNT_NAME=gcr-spinnaker
