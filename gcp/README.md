@@ -17,9 +17,12 @@ To make sure we don't stumble into problems later, you need to perform the follo
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
 1. from your laptop perform a `gcloud ssh` into said instance
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
-1. Run the [script](./scripts/api_test.sh) on that instance that will do some api calls this process will execute
- 
-If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account with terraform.
+1. Run the [script](./scripts/api_test.sh) on that instance that will do some api calls that CAPSTAN will also perform. Update the value `TOOLS_SERVICE_ACCOUNT_NAME` (to like `terraform-admin` like before). If you get prompted to say yes/no then say yes
+   1. Run it a second time to make sure there is no output
+1. Finally, there is an API enablement that will require simple console navigation to enable. You will need to use the left navigation and access `Container Engine` which is ussually located below `compute engine`. On first time access of thie menu you should see a "preparing" type message. When this is complete execute the following in the temp instance: `gcloud container clusters list`. If this exits without error than the API is enabled.
+
+
+If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account to set-up terraform.
 
 ### Set-up Terraform
 
@@ -46,13 +49,15 @@ FINALLY....
 
 At this point, you need to change directory into the terraform folder and type:
 
+`whoami` which will get you your ssh username
+
 `terraform plan`
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
 `terraform apply` and enter the ssh user name and project id again. 
 
-Now, wait 30 minutes. 
+Now, wait 20 minutes. 
 
 ## Validate your new Toys
 
@@ -93,3 +98,8 @@ If you want acccess to the K8 user experince:
 - gcloud container clusters get-credentials [name GKE cluster]
 - kubectl proxy
 - open `http://localhost:8001/ui` in a browser and you should the K8 web console
+
+
+## Post Deploy Jenkins Set-up
+
+
