@@ -19,7 +19,7 @@ To make sure we don't stumble into problems later, you need to perform the follo
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 1. Run the [script](./scripts/api_test.sh) on that instance that will do some api calls that CAPSTAN will also perform. Update the value `TOOLS_SERVICE_ACCOUNT_NAME` (to like `terraform-admin` like before). If you get prompted to say yes/no then say yes
    1. Run it a second time to make sure there is no output
-1. Finally, there is an API enablement that will require simple console navigation to enable. You will need to use the left navigation and access `Container Engine` which is ussually located below `compute engine`. On first time access of thie menu you should see a "preparing" type message. When this is complete execute the following in the temp instance: `gcloud container clusters list`. If this exits without error than the API is enabled.
+1. Finally, there is an API enablement that will require simple console navigation to enable. You will need to use the left navigation and access *`Container Engine`* which is ussually located below *`compute engine`*. On first time access of this menu you should see a "preparing" type message. When this is complete execute the following on the temp instance: `gcloud container clusters list`. If this exits without error than the API is enabled.
 
 
 If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account to set-up terraform.
