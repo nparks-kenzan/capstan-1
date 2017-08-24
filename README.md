@@ -9,7 +9,7 @@ Anyway if you are here you are interested in:
 - Using Kubernettes
 - Using Spinnaker
 - Using Jenkins
-- Not wanting to figureout how to set all that up yourself on some IaaS
+- Not wanting to figure out how to set all that up yourself on some IaaS
 - Just want to deploy containerized apps without all the fuss of doing all that set-up
 
 Oh, we have a solution for you!
