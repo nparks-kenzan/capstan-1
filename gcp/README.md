@@ -102,4 +102,17 @@ If you want acccess to the K8 user experince:
 
 ## Post Deploy Jenkins Set-up
 
+Access the Jenkins console to enable K8 based building.
+
+
+1. In the Jenkins UI, Click “Credentials” on the left
+1. Click either of the “(global)” links (they both route to the same URL)
+1. Click “Add Credentials” on the left
+1. From the “Kind” dropdown, select “Google Service Account from metadata”
+1. Click “OK”
+
+Repeat this process and in the "Kind" dropdown select "Kubernetes Service Account"
+
+
+NOTICE: Do not configure the kubernetes plugin to use credentials
 
