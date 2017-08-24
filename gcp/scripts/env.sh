@@ -8,6 +8,7 @@ TOOLS_SERVICE_ACCOUNT_NAME=super-halyard
 ZONE=us-central1-a
 #FIXME do not use other zones yet
 OTHER_ZONES=""
+#OTHER_ZONES="--additional-zones us-central1-b,us-central1-c"
 #### Expected JenkinsSpinnakerClusterName Cluster Name
 CLUSTER_NAME=cdci-runtime
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
