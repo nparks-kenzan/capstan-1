@@ -13,9 +13,9 @@ So git clone this project (or your own fork of it) and with your favorite comman
 ### Validate your GCP project
 
 To make sure we don't stumble into problems later, you need to perform the following:
-1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Maybe call it `terraform-admin`
+1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin`
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
-1. from your laptop perform a `gcloud ssh` into said instance
+1. from your laptop perform a `gcloud ssh` into said instance (You might have to perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) first)
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 
 
@@ -30,9 +30,9 @@ Terraform needs credentials to perform administrator level operations. To do thi
 
 **Procedure**
 1. Log into the Google  Console and select the project.
-1. The API Manager view should be selected, click on "Credentials" on the left, then "Create credentials", and finally "Service account key".
-1. Select "[service account you created for testing purposes]" in the "Service account" dropdown, and select "JSON" as the key type.
-1. Clicking "Create" will download your credentials.
+1. Navigate to `IAM & Admin`, click on "Service Accounts" on the left
+1. In the list of accounts locate `terraform-admin` and in the options column select `create key`
+1. A json key file should be downloaded to your machine.
 1. Move/rename the json file to `gcp-account.json` and place in the folder with the other terraform scripts
 
 #### Configure Terraform SSH
