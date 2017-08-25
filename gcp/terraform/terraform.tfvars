@@ -8,7 +8,7 @@
 # You need to change it in the env.sh
 #
 region = "us-central1"
-zone = "a"
+zone = "f"
 
 ### Project Info
 #

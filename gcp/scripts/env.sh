@@ -1,14 +1,14 @@
 
 ############################################# Tools instance
 
-TOOLS_SERVICE_ACCOUNT_NAME=super-halyard
+TOOLS_SERVICE_ACCOUNT_NAME=halyard-tunnel-tools
 
 ############################################# GCP / GKE 
 
-ZONE=us-central1-a
+ZONE=us-central1-f
 #FIXME do not use other zones yet
 OTHER_ZONES=""
-#OTHER_ZONES="--additional-zones us-central1-b,us-central1-c"
+#OTHER_ZONES="--additional-zones us-central1-b,us-central1-c,us-central1-a"
 #### Expected JenkinsSpinnakerClusterName Cluster Name
 CLUSTER_NAME=cdci-runtime
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
