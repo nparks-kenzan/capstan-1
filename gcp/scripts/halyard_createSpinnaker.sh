@@ -10,8 +10,6 @@
 ##########################
 ###
 source $PWD/env.sh
-#source $PWD/k8_oauth.sh
-
 
 ####
 
