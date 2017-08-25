@@ -38,7 +38,7 @@ echo ">>>> Get Helm"
 curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.5.1-linux-amd64.tar.gz
 tar -xvf helm-v2.5.1-linux-amd64.tar.gz 
 chmod +x linux-amd64/helm
-mv linux-amd64/helm /usr/local/bin/helm
+sudo mv linux-amd64/helm /usr/local/bin/helm
 
 
 
