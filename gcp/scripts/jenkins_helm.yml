@@ -45,6 +45,7 @@ Master:
       - credentials-binding:1.12
       - git:3.5.1
       - gradle:1.27.1
+      - job-dsl:1.64
       - minio-storage:0.0.2
       - google-storage-plugin:0.13
       - google-container-registry-auth:0.3
