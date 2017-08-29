@@ -54,8 +54,7 @@ When this is done you will create an SSH tunnel to Spinnaker. More details of th
 
 ## What's Next
 
-- Maintenance release 1.5 for GCP
-- Release 2.0 for AWS
+- AWS?
 - Whenever [Declarative](https://blog.spinnaker.io/codifying-your-spinnaker-pipelines-ea8e9164998f) [Pipelines](https://github.com/spinnaker/dcd-spec) appear in stable without the phrase [breaking](https://github.com/spinnaker/orca/tree/master/orca-pipelinetemplate) changes
 - No more SSH Tunnel nonesense!
 
