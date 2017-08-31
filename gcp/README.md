@@ -13,13 +13,13 @@ So git clone this project (or your own fork of it) and with your favorite comman
 ### Validate your GCP project
 
 To make sure we don't stumble into problems later, you need to perform the following:
-1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Maybe call it `terraform-admin`
+1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin`
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
-1. from your laptop perform a `gcloud ssh` into said instance
+1. from your laptop perform a `gcloud ssh` into said instance (You might have to perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) first)
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
-1. Run the [script](./scripts/api_test.sh) on that instance that will do some api calls this process will execute
- 
-If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account with terraform.
+
+
+If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account to set-up terraform.
 
 ### Set-up Terraform
 
@@ -30,9 +30,9 @@ Terraform needs credentials to perform administrator level operations. To do thi
 
 **Procedure**
 1. Log into the Google  Console and select the project.
-1. The API Manager view should be selected, click on "Credentials" on the left, then "Create credentials", and finally "Service account key".
-1. Select "[service account you created for testing purposes]" in the "Service account" dropdown, and select "JSON" as the key type.
-1. Clicking "Create" will download your credentials.
+1. Navigate to `IAM & Admin`, click on "Service Accounts" on the left
+1. In the list of accounts locate `terraform-admin` and in the options column select `create key`
+1. A json key file should be downloaded to your machine.
 1. Move/rename the json file to `gcp-account.json` and place in the folder with the other terraform scripts
 
 #### Configure Terraform SSH
@@ -46,13 +46,15 @@ FINALLY....
 
 At this point, you need to change directory into the terraform folder and type:
 
+`whoami` which will get you your ssh username
+
 `terraform plan`
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
 `terraform apply` and enter the ssh user name and project id again. 
 
-Now, wait 30 minutes. 
+Now, wait 20 minutes. 
 
 ## Validate your new Toys
 
@@ -90,6 +92,24 @@ Done!
 
 
 If you want acccess to the K8 user experince:
-- gcloud container clusters get-credentials [name GKE cluster]
+- gcloud container clusters get-credentials [name of GKE cluster]
 - kubectl proxy
 - open `http://localhost:8001/ui` in a browser and you should the K8 web console
+
+
+## Post Deploy Jenkins Set-up
+
+Access the Jenkins console to enable K8 based building.
+
+
+1. In the Jenkins UI, Click “Credentials” on the left
+1. Click either of the “(global)” links (they both route to the same URL)
+1. Click “Add Credentials” on the left
+1. From the “Kind” dropdown, select “Google Service Account from metadata”
+1. Click “OK”
+
+Repeat this process and in the "Kind" dropdown select "Kubernetes Service Account"
+
+
+NOTICE: Do not configure the kubernetes plugin to use credentials
+

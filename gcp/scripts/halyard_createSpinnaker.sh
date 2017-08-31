@@ -10,8 +10,6 @@
 ##########################
 ###
 source $PWD/env.sh
-#source $PWD/k8_oauth.sh
-
 
 ####
 
@@ -95,8 +93,8 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 echo "==== -> Remember Jenkins"
 
-JENKINS_PW=`cat $PWD/$JENKINS_SAVED_PW`
-JENKINS_IP=`cat $PWD/$JENKINS_SAVED_IP`
+JENKINS_PW=`printf $(kubectl get secret --namespace $JENKINS_NAMESPACE $JENKINS_HELM_RELEASENAME-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo`
+JENKINS_IP="http://$JENKINS_HELM_RELEASENAME-jenkins.$JENKINS_NAMESPACE:$JENKINS_PORT"
 
 H_CMD="hal config ci jenkins master add jnks --address $JENKINS_IP --username $JENKINS_ADMIN_USER --password"
 echo $JENKINS_PW | $H_CMD
