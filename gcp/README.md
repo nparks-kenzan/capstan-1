@@ -92,7 +92,7 @@ Done!
 
 
 If you want acccess to the K8 user experince:
-- gcloud container clusters get-credentials [name GKE cluster]
+- gcloud container clusters get-credentials [name of GKE cluster]
 - kubectl proxy
 - open `http://localhost:8001/ui` in a browser and you should the K8 web console
 
