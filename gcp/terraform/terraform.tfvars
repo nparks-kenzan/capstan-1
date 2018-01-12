@@ -1,6 +1,6 @@
 #####
 # Varibles for TF - thanks pancoast
-# 
+#
 #####
 
 #### Where are we?
@@ -18,7 +18,7 @@ created_by = "kenzan-capstan"
 
 
 #
-#	Note: This needs to be the ssh key you have associated with your google compute 
+#	Note: This needs to be the ssh key you have associated with your google compute
 #		engine account. It can't just be some random one.
 #
 ssh_private_key_location = "~/.ssh/google_compute_engine"
@@ -34,6 +34,6 @@ creds_file = "gcp-account.json"
 #		changing spinnaker type
 #
 halyard_machine_type = "n1-standard-1"
-ubuntu_image = "ubuntu-1404-trusty-v20170703"
+ubuntu_image = "ubuntu-1404-trusty-v20190110"
 halyard_machine_name="halyard-tunnel"
 service_account_name="halyard-tunnel-tools"
