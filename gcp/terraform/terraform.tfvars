@@ -34,6 +34,6 @@ creds_file = "gcp-account.json"
 #		changing spinnaker type
 #
 halyard_machine_type = "n1-standard-1"
-ubuntu_image = "ubuntu-1404-trusty-v20190110"
+ubuntu_image = "ubuntu-1404-trusty-v20180110"
 halyard_machine_name="halyard-tunnel"
 service_account_name="halyard-tunnel-tools"
