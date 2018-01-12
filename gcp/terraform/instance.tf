@@ -8,8 +8,10 @@ resource "google_compute_instance" "halyardtunnel" {
 
 	tags = ["halyard","${var.created_by}","ssh-tunnel"]
 
-	disk {
-		image = "${var.ubuntu_image}"
+	boot_disk {
+		initialize_params {
+			image = "${var.ubuntu_image}"
+		}
 	}
 
 	  service_account {
