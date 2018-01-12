@@ -2,7 +2,7 @@
 
 ##########################
 # Kenzan LLC Script Executed by TerraForm on GCP Instance
-# 
+#
 # Do you have a powerfull enough service account to do this stuff?
 # THis is to run from an instance in GCP
 #
@@ -31,12 +31,12 @@ echo ">>>> Get Halyard"
 curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/stable/InstallHalyard.sh
 sudo bash InstallHalyard.sh -y
 
-hal -v 
+hal -v
 
 echo ">>>> Get Helm"
 
-curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.5.1-linux-amd64.tar.gz
-tar -xvf helm-v2.5.1-linux-amd64.tar.gz 
+curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz
+tar -xvf helm-v2.7.2-linux-amd64.tar.gz 
 chmod +x linux-amd64/helm
 sudo mv linux-amd64/helm /usr/local/bin/helm
 
