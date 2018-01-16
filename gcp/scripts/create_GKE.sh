@@ -30,7 +30,7 @@ gcloud service-management enable container.googleapis.com
 
 # Create the Actual GKE cluster
 echo ">>>>> Create Cluster"
-GKE_CLUSTER_VERSION="1.8.6-gke0"
+GKE_CLUSTER_VERSION="1.8.6-gke.0"
 GKE_MACHINE_TYPE="n1-standard-2"
 gcloud container --project $PROJECT_NAME clusters create $CLUSTER_NAME --zone $ZONE --username="admin" --cluster-version $GKE_CLUSTER_VERSION --machine-type $GKE_MACHINE_TYPE --image-type "COS" --disk-size "100" --scopes "https://www.googleapis.com/auth/compute","https://www.googleapis.com/auth/devstorage.read_write","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring.write","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append","https://www.googleapis.com/auth/source.read_write","https://www.googleapis.com/auth/projecthosting,storage-rw" --num-nodes $NODE_PER_ZONE --network "default" --enable-cloud-logging --enable-cloud-monitoring $OTHER_ZONES --enable-legacy-authorization
 
