@@ -2,7 +2,7 @@
 
 ##########################
 # Kenzan LLC -> Create Spinnaker
-# 
+#
 ## Can your GCP Service Account do this?
 ## Did you create Jenkins in GKE first?
 #
@@ -10,6 +10,11 @@
 ##########################
 ###
 source $PWD/env.sh
+PROJECT_NAME=$1
+CLUSTER_NAME=$2
+CLUSTER_ZONE=$3
+
+HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 
 ####
 
@@ -19,11 +24,11 @@ echo " - Let's Get this Halyard Thing Together -"
 echo "=========================================="
 
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
-gcloud config set compute/zone $ZONE
+gcloud config set compute/zone $CLUSTER_ZONE
 
 echo "==== -> Let's Get a service account created"
 
-
+### DPW - Make this check to see if account is already created. ###
 gcloud iam service-accounts create  $SERVICE_ACCOUNT_NAME --display-name $SERVICE_ACCOUNT_NAME
 
 SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOUNT_NAME" --format='value(email)')
@@ -53,26 +58,29 @@ hal config storage edit --type gcs
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
-### BS to make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608 
+### BS to make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608
 sudo docker pull nginx
 sudo docker tag nginx:latest $ADDRESS/$PROJECT_NAME/nginx
 sudo gcloud docker -- push $ADDRESS/$PROJECT_NAME/nginx
 #### end BS
 
 hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
-hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO 
+hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO
 hal config provider docker-registry enable
 
 #echo "==== -> NoneSense Kubectl fix"
 
 CONTEXT_prefix="gke_"
-CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$ZONE\_$CLUSTER_NAME
+CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
+### DPW: Trying to debug user ###
+id
+
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES 
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES
 
 hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
@@ -103,7 +111,7 @@ hal config ci jenkins enable
 
 echo "==== -> Let's Diff our Deployment real quick"
 
-hal deploy diff 
+hal deploy diff
 
 
 echo "======= Time to be Gangsta, this will take a while  ========"
@@ -113,7 +121,6 @@ hal deploy apply
 echo "=========================================="
 echo " - Hopefully there is a Spinnaker -"
 echo " - Tunnel to halyard-tunnel and"
-echo " - then run halyard deploy connect"
+echo " - then run hal deploy connect"
 echo "=========================================="
 echo "******************************************"
-
