@@ -43,6 +43,12 @@ resource "google_container_cluster" "primary" {
     zone = "${var.gke_primary_zone}"
     additional_zones = "${var.gke_additional_zones}"
 
+    depends_on = [
+        "google_project_service.iam_service",
+        "google_project_service.cloudresourcemanager_service",
+        "google_project_service.container_service"
+    ]
+
     node_config {
         oauth_scopes = [
             "https://www.googleapis.com/auth/compute",

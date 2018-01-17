@@ -3,7 +3,12 @@ resource "google_compute_instance" "halyardtunnel" {
     machine_type = "${var.halyard_machine_type}"
     zone = "${var.region}-${var.zone}"
 
-    depends_on = ["google_container_cluster.primary"]
+    depends_on = [
+        "google_container_cluster.primary",
+        "google_project_service.iam_service",
+        "google_project_service.cloudresourcemanager_service",
+        "google_project_service.container_service"
+    ]
 
     tags = ["halyard","${var.created_by}","ssh-tunnel"]
 
