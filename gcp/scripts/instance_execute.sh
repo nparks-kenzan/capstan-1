@@ -43,7 +43,7 @@ hal -v
 echo ">>>> Get Helm"
 HELM_VERSION=$( get_latest_release "kubernetes/helm" )
 curl -LO https://kubernetes-helm.storage.googleapis.com/helm-$HELM_VERSION-linux-amd64.tar.gz
-tar -xvf helm-v2.7.2-linux-amd64.tar.gz 
+tar -xzf helm-$HELM_VERSION-linux-amd64.tar.gz # Faster to not print the filenames when extracting.
 chmod +x linux-amd64/helm
 sudo mv linux-amd64/helm /usr/local/bin/helm
 
