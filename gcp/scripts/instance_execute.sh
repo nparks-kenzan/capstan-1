@@ -15,6 +15,13 @@ echo "=========================================="
 echo " - Starting CD Environment Creation Process -"
 echo "=========================================="
 
+# From Gist: https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+}
+
 sudo apt-get update
 
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
@@ -34,9 +41,9 @@ sudo bash InstallHalyard.sh -y
 hal -v
 
 echo ">>>> Get Helm"
-
-curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz
-tar -xvf helm-v2.7.2-linux-amd64.tar.gz 
+HELM_VERSION=$( get_latest_release "kubernetes/helm" )
+curl -LO https://kubernetes-helm.storage.googleapis.com/helm-$HELM_VERSION-linux-amd64.tar.gz
+tar -xzf helm-$HELM_VERSION-linux-amd64.tar.gz # Faster to not print the filenames when extracting.
 chmod +x linux-amd64/helm
 sudo mv linux-amd64/helm /usr/local/bin/helm
 
