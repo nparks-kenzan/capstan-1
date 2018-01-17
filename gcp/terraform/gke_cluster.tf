@@ -44,9 +44,9 @@ resource "google_container_cluster" "primary" {
     additional_zones = "${var.gke_additional_zones}"
 
     depends_on = [
-        "google_project_service.iam_service",
-        "google_project_service.cloudresourcemanager_service",
-        "google_project_service.container_service"
+        #"google_project_service.iam_service",
+        #"google_project_service.cloudresourcemanager_service",
+        #"google_project_service.container_service"
     ]
 
     node_config {
