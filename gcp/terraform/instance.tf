@@ -4,10 +4,10 @@ resource "google_compute_instance" "halyardtunnel" {
     zone = "${var.region}-${var.zone}"
 
     depends_on = [
-        "google_project_service.iam_service",
-        "google_project_service.cloudresourcemanager_service",
-        "google_project_service.container_service",
-        "google_iam_policy.admin",
+        #"google_project_service.iam_service",
+        #"google_project_service.cloudresourcemanager_service",
+        #"google_project_service.container_service",
+        "google_project_iam_policy.project",
         "google_container_cluster.primary"
     ]
 
