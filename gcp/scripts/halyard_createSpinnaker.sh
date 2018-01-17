@@ -10,6 +10,7 @@
 ##########################
 ###
 source $PWD/env.sh
+
 PROJECT_NAME=$1
 CLUSTER_NAME=$2
 CLUSTER_ZONE=$3
@@ -28,7 +29,6 @@ gcloud config set compute/zone $CLUSTER_ZONE
 
 echo "==== -> Let's Get a service account created"
 
-### DPW - Make this check to see if account is already created. ###
 gcloud iam service-accounts create  $SERVICE_ACCOUNT_NAME --display-name $SERVICE_ACCOUNT_NAME
 
 SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOUNT_NAME" --format='value(email)')
@@ -74,9 +74,6 @@ CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
-
-### DPW: Trying to debug user ###
-id
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
