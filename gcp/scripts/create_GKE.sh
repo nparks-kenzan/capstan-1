@@ -28,9 +28,9 @@ echo "  CLUSTER_ZONE: $CLUSTER_ZONE"
 
 echo ">>>>> Enable gcloud API needs"
 
-gcloud service-management enable iam.googleapis.com
-gcloud service-management enable cloudresourcemanager.googleapis.com
-gcloud service-management enable container.googleapis.com
+#gcloud service-management enable iam.googleapis.com
+#gcloud service-management enable cloudresourcemanager.googleapis.com
+#gcloud service-management enable container.googleapis.com
 
 
 # Create the Actual GKE cluster
