@@ -26,7 +26,7 @@ If everything happened without issue then we are good. You no longer need this t
 If you were able to perform the final ssh option with gcloud you inadvertently performed most of the prep to enable terraform to work on your Google Project.
 
 #### Configure Terraform GCP Credentials
-Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file. 
+Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file.
 
 **Procedure**
 1. Log into the Google  Console and select the project.
@@ -37,10 +37,10 @@ Terraform needs credentials to perform administrator level operations. To do thi
 
 #### Configure Terraform SSH
 
-Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there. 
+Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there.
 
 ### You are ready to begin
- 
+
 
 FINALLY....
 
@@ -52,9 +52,9 @@ At this point, you need to change directory into the terraform folder and type:
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
-`terraform apply` and enter the ssh user name and project id again. 
+`terraform apply` and enter the ssh user name and project id again.
 
-Now, wait 20 minutes. 
+Now, wait 20 minutes.
 
 ## Validate your new Toys
 
@@ -67,7 +67,7 @@ google_compute_instance.halyardtunnel (remote-exec): ===========================
 `
 
 
-So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way. 
+So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way.
 
 So **check #1.** Make sure you can log into Jenkins
 
@@ -81,10 +81,9 @@ Using your work station you will create an SSH tunnel to your 'halyard-tunnel' G
 gcloud compute --project "[PROJECT_NAME]" ssh --zone "[THE ZONE YOU DEPLOYED TOO]" "[halyard-tunnel or whatever]"  --ssh-flag="-L 9000:localhost:9000" --ssh-flag="-L 8084:localhost:8084"
 `
 
+Once there you will then perform `hal deploy connect`
 
-Once there you will then perform `halyard deploy connect`
-
-If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface. 
+If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface.
 
 So that would be **check #2**
 
@@ -112,4 +111,3 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
-
