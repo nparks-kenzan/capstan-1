@@ -5,15 +5,6 @@ TOOLS_SERVICE_ACCOUNT_NAME=halyard-tunnel-tools
 
 ############################################# GCP / GKE
 
-ZONE=us-central1-f
-#FIXME do not use other zones yet
-OTHER_ZONES=""
-#OTHER_ZONES="--additional-zones us-central1-b,us-central1-c,us-central1-a"
-#### Expected JenkinsSpinnakerClusterName Cluster Name
-CLUSTER_NAME=cdci-runtime
-HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
-#There will be a N nodes per zone, if in 4 zones this will result in 4 nodes
-NODE_PER_ZONE=3
 #cloud storage location
 BUCKET_LOCATION=us
 
