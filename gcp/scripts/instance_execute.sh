@@ -59,6 +59,9 @@ curl -LO https://github.com/spinnaker/roer/releases/download/$ROER_VERSION/roer-
 chmod a+x roer-windows-amd64
 sudo mv roer-windows-amd64 /usr/local/bin/roer
 
+echo ">>>> Add the SPINNAKER_API environ"
+echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
+
 #### We need expect also
 #sudo apt-get install expect -y
 
