@@ -56,8 +56,8 @@ sudo apt-get install git golang-go -y
 echo ">>>> Get Roer"
 ROER_VERSION=$( get_latest_release "spinnaker/roer" )
 curl -LO https://github.com/spinnaker/roer/releases/download/$ROER_VERSION/roer-linux-amd64
-chmod a+x roer-windows-amd64
-sudo mv roer-windows-amd64 /usr/local/bin/roer
+chmod a+x roer-linux-amd64
+sudo mv roer-linux-amd64 /usr/local/bin/roer
 
 echo ">>>> Add the SPINNAKER_API environ"
 echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
