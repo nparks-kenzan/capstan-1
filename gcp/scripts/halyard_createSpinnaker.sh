@@ -55,6 +55,8 @@ hal config storage gcs edit --project $PROJECT_NAME --bucket-location $BUCKET_LO
 
 hal config storage edit --type gcs
 
+hal config features edit --pipeline-templates true
+
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
