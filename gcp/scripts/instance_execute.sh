@@ -65,7 +65,7 @@ echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
 #### We need expect also
 #sudo apt-get install expect -y
 
-echo ">>>> Get Lame Docker"
+echo ">>>> Get Docker"
 #### this is not a version you would want to use but it will get the job done
 sudo apt-get install -y docker.io
 
