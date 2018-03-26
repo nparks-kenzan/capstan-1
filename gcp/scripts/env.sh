@@ -27,7 +27,7 @@ JENKINS_HELM_RELEASENAME="ci"
 ADDRESS=gcr.io
 SERVICE_ACCOUNT_NAME=gcr-spinnaker
 SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
-REGISTRY_NAME=imagerepository
+REGISTRY_NAME=gcpimagerepository
 SPINNAKER_VERSION="1.5.4"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
