@@ -111,3 +111,8 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
+
+## See Release Notes
+
+[Release Notes](RELEASE_NOTES.md)
+
