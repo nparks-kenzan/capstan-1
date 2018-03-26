@@ -4,6 +4,7 @@ This Folder contains the scripts and the terraform needed to create a Continuous
 
 If you have no idea how to even use GCP I would recommend a [coursera course](https://www.coursera.org/learn/gcp-infrastructure-foundation)
 
+
 ## Let's Get Started
 
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
