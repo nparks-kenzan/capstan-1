@@ -4,7 +4,7 @@
 
 ## Creating Issues
 
-- Find something broken? Create a GitHub issue, after checking that the issue exists
+- Find something broken? No existing Github issue? Create a issue in Github
 - Did you fix something?
   - If there  is an issue make a PR that references the issue...make sure the issue describes the brokeness well.
   - If there is not an issue, thanks and just described what you fixed in your PR

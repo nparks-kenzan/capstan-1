@@ -50,7 +50,7 @@ When this is done you will create an SSH tunnel to Spinnaker. More details of th
 ## Amazon Web Services
 
 1. I will throw our good friend @jpancoast-kenzan under the bus at https://github.com/kenzanlabs/spinnaker-terraform
-1. Otherwise waiting on EKS life everyone else
+1. Otherwise waiting on EKS like everyone else
 
 
 
