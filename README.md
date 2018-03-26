@@ -22,7 +22,7 @@ The process is illustrated as follows:
 ![GCP Process](gcp_process.png)
 
 
-Essentially, from your workstation you are using TerraForm to create a service account and to launch and instance that will run a script landed by terraform to perform the creation of the GKE platform, jenkins, and Spinnaker. Future versions will also use *declarative pipelines*
+Essentially, from your workstation you are using TerraForm to create a service account. K8 cluster and to launch and instance that will run a script landed by terraform to perform the creation of  jenkins and Spinnaker. Future versions will also use *declarative pipelines*
 
 ### Prerequisites
 
