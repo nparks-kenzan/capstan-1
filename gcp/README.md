@@ -50,7 +50,7 @@ At this point, you need to change directory into the terraform folder and type:
 
 `whoami` which will get you your ssh username
 
-`terraform plan` (you might have to perform `terraform init` first)
+`terraform plan` (you might have to perform `terraform init` first if you have not used terraform with GCP)
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
