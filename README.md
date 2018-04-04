@@ -56,7 +56,7 @@ When this is done you will create an SSH tunnel to Spinnaker. More details of th
 
 ## See Also
 
-1. [Continious Delivery with Spinnaker and Kubernetes](http://continuousdelivery.kenzan.com/)
+1. [Continuous Delivery with Spinnaker and Kubernetes](http://continuousdelivery.kenzan.com/)
 
 
 
