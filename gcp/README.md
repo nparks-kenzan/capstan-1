@@ -130,5 +130,5 @@ NOTICE: Do not configure the kubernetes plugin to use credentials
 
 ## See Release Notes
 
-[Release Notes](RELEASE_NOTES.md)
+[Release Notes](RELEASE_NOTES.MD)
 
