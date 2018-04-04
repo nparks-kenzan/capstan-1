@@ -26,10 +26,10 @@ The latest and greatest code is always in Development. That does not mean that d
 
 ## Releases and Tags
 
-How are tags and released used?
+How are tags and releases used?
 
 - *Releases* in Github are always based on tags on master
 - Development should have the same features as master at every *release*
-- Tagged releases closely correlate to master and development have some sort of code parity
+- Tagged releases closely correlate to master and development having some sort of code parity
 
 
