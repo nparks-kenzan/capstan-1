@@ -4,6 +4,7 @@ This Folder contains the scripts and the terraform needed to create a Continuous
 
 If you have no idea how to even use GCP I would recommend a [coursera course](https://www.coursera.org/learn/gcp-infrastructure-foundation)
 
+
 ## Let's Get Started
 
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
@@ -12,21 +13,36 @@ So git clone this project (or your own fork of it) and with your favorite comman
 
 ### Validate your GCP project
 
+#### Connectivity 
+
 To make sure we don't stumble into problems later, you need to perform the following:
 1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin`
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
-1. from your laptop perform a `gcloud ssh` into said instance (You might have to perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) first)
+1. Perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) if you have not done so as part of installing gcloud
+1. From your laptop perform a `gcloud ssh` into said instance. You can get the full  `gcloud` command from the dropdown arrow next to the SSH button for the instance.  
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 
 
 If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account to set-up terraform.
+
+#### Enable Google Project Features
+
+After verifying connectivity, we need to enable services/api endpoints for terraform. 
+
+Using the terminal window where you just attempted `gcloud ssh` perform the following commands to enable APIs for your project
+
+1. `gcloud services enable container.googleapis.com`
+1. `gcloud services enable iam.googleapis.com`
+1. `gcloud services enable cloudresourcemanager.googleapis.com`
+
+Those commands should have completed successfully. 
 
 ### Set-up Terraform
 
 If you were able to perform the final ssh option with gcloud you inadvertently performed most of the prep to enable terraform to work on your Google Project.
 
 #### Configure Terraform GCP Credentials
-Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file. 
+Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file.
 
 **Procedure**
 1. Log into the Google  Console and select the project.
@@ -37,10 +53,10 @@ Terraform needs credentials to perform administrator level operations. To do thi
 
 #### Configure Terraform SSH
 
-Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there. 
+Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there.
 
 ### You are ready to begin
- 
+
 
 FINALLY....
 
@@ -48,13 +64,13 @@ At this point, you need to change directory into the terraform folder and type:
 
 `whoami` which will get you your ssh username
 
-`terraform plan`
+`terraform plan` (you might have to perform `terraform init` first if you have not used terraform with GCP)
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
-`terraform apply` and enter the ssh user name and project id again. 
+`terraform apply` and enter the ssh user name and project id again.
 
-Now, wait 20 minutes. 
+Now, wait 20 minutes.
 
 ## Validate your new Toys
 
@@ -67,7 +83,7 @@ google_compute_instance.halyardtunnel (remote-exec): ===========================
 `
 
 
-So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way. 
+So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way.
 
 So **check #1.** Make sure you can log into Jenkins
 
@@ -81,10 +97,9 @@ Using your work station you will create an SSH tunnel to your 'halyard-tunnel' G
 gcloud compute --project "[PROJECT_NAME]" ssh --zone "[THE ZONE YOU DEPLOYED TOO]" "[halyard-tunnel or whatever]"  --ssh-flag="-L 9000:localhost:9000" --ssh-flag="-L 8084:localhost:8084"
 `
 
+Once there you will then perform `hal deploy connect`
 
-Once there you will then perform `halyard deploy connect`
-
-If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface. 
+If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface.
 
 So that would be **check #2**
 
@@ -112,4 +127,8 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
+
+## See Release Notes
+
+[Release Notes](RELEASE_NOTES.MD)
 

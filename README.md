@@ -5,7 +5,7 @@ Tools for creating Spinnaker demo environments
 
 What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical)) .... That big rope...it is a Halyard - ZING!
 
-Anyway if you are here you are interested in:
+if you are here you are interested in:
 - Using Kubernettes
 - Using Spinnaker
 - Using Jenkins
@@ -22,7 +22,7 @@ The process is illustrated as follows:
 ![GCP Process](gcp_process.png)
 
 
-Essentially, from your workstation you are using TerraForm to create a service account and to launch and instance that will run a script landed by terraform to perform the creation of the GKE platform, jenkins, and Spinnaker. Future versions will also use *declarative pipelines*
+Essentially, from your workstation you are using TerraForm to create a service account. K8 cluster and to launch and instance that will run a script landed by terraform to perform the creation of  jenkins and Spinnaker. Future versions will also use *declarative pipelines*
 
 ### Prerequisites
 
@@ -49,17 +49,14 @@ When this is done you will create an SSH tunnel to Spinnaker. More details of th
 
 ## Amazon Web Services
 
-... I will throw our good friend @jpancoast-kenzan under the bus at https://github.com/kenzanlabs/spinnaker-terraform
-
-
-## What's Next
-
-- AWS?
-- Whenever [Declarative](https://blog.spinnaker.io/codifying-your-spinnaker-pipelines-ea8e9164998f) [Pipelines](https://github.com/spinnaker/dcd-spec) appear in stable without the phrase [breaking](https://github.com/spinnaker/orca/tree/master/orca-pipelinetemplate) changes
-- No more SSH Tunnel nonesense!
+1. I will throw our good friend @jpancoast-kenzan under the bus at https://github.com/kenzanlabs/spinnaker-terraform
+1. Otherwise waiting on EKS like everyone else
 
 
 
+## See Also
+
+1. [Continious Delivery with Spinnaker and Kubernetes](http://continuousdelivery.kenzan.com/)
 
 
 

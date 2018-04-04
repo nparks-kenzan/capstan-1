@@ -2,7 +2,7 @@
 
 ##########################
 # Kenzan LLC Script Executed by TerraForm on GCP Instance
-# 
+#
 # Do you have a powerfull enough service account to do this stuff?
 # THis is to run from an instance in GCP
 #
@@ -14,6 +14,13 @@ echo "******************************************"
 echo "=========================================="
 echo " - Starting CD Environment Creation Process -"
 echo "=========================================="
+
+# From Gist: https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+}
 
 sudo apt-get update
 
@@ -31,25 +38,34 @@ echo ">>>> Get Halyard"
 curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/stable/InstallHalyard.sh
 sudo bash InstallHalyard.sh -y
 
-hal -v 
+hal -v
 
 echo ">>>> Get Helm"
-
-curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.5.1-linux-amd64.tar.gz
-tar -xvf helm-v2.5.1-linux-amd64.tar.gz 
+HELM_VERSION=$( get_latest_release "kubernetes/helm" )
+curl -LO https://kubernetes-helm.storage.googleapis.com/helm-$HELM_VERSION-linux-amd64.tar.gz
+tar -xzf helm-$HELM_VERSION-linux-amd64.tar.gz # Faster to not print the filenames when extracting.
 chmod +x linux-amd64/helm
 sudo mv linux-amd64/helm /usr/local/bin/helm
 
 
 
-echo ">>>> Get git"
+echo ">>>> Get git and other good stuffs"
 ### get git
-sudo apt-get install git -y
+sudo apt-get install git golang-go -y
+
+echo ">>>> Get Roer"
+ROER_VERSION=$( get_latest_release "spinnaker/roer" )
+curl -LO https://github.com/spinnaker/roer/releases/download/$ROER_VERSION/roer-linux-amd64
+chmod a+x roer-linux-amd64
+sudo mv roer-linux-amd64 /usr/local/bin/roer
+
+echo ">>>> Add the SPINNAKER_API environ"
+echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
 
 #### We need expect also
 #sudo apt-get install expect -y
 
-echo ">>>> Get Lame Docker"
+echo ">>>> Get Docker"
 #### this is not a version you would want to use but it will get the job done
 sudo apt-get install -y docker.io
 
