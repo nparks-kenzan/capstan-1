@@ -23,8 +23,9 @@ echo "  CLUSTER_ZONE: $CLUSTER_ZONE"
 # enable commands
 echo ">>>>> Enable gcloud API needs"
 
-# These will be moved to terraform once a release with PR happens:
-# https://github.com/terraform-providers/terraform-provider-google/pull/965
+#we should not need these API calls because
+# 1. use services instead of service-management
+# 2. Initial project verification requires you to execute these api calls already
 gcloud service-management enable iam.googleapis.com
 gcloud service-management enable cloudresourcemanager.googleapis.com
 gcloud service-management enable container.googleapis.com

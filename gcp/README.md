@@ -13,15 +13,29 @@ So git clone this project (or your own fork of it) and with your favorite comman
 
 ### Validate your GCP project
 
+#### Connectivity 
+
 To make sure we don't stumble into problems later, you need to perform the following:
 1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin`
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
 1. Perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) if you have not done so as part of installing gcloud
-1. From your laptop perform a `gcloud ssh` into said instance. You can get the full  `gcloud` command from the downdown arrow next to the SSH button for the instance.  
+1. From your laptop perform a `gcloud ssh` into said instance. You can get the full  `gcloud` command from the dropdown arrow next to the SSH button for the instance.  
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 
 
 If everything happened without issue then we are good. You no longer need this test instance. You can delete it. We will use the service account to set-up terraform.
+
+#### Enable Google Project Features
+
+After verifying connectivity, we need to enable services/api endpoints for terraform. 
+
+Using the terminal window where you just attempted `gcloud ssh` perform the following commands to enable APIs for your project
+
+1. gcloud services enable container.googleapis.com
+1. gcloud services enable iam.googleapis.com
+1. gcloud services enable cloudresourcemanager.googleapis.com
+
+Those commands should have completed successfully. 
 
 ### Set-up Terraform
 
