@@ -31,9 +31,9 @@ After verifying connectivity, we need to enable services/api endpoints for terra
 
 Using the terminal window where you just attempted `gcloud ssh` perform the following commands to enable APIs for your project
 
-1. gcloud services enable container.googleapis.com
-1. gcloud services enable iam.googleapis.com
-1. gcloud services enable cloudresourcemanager.googleapis.com
+1. `gcloud services enable container.googleapis.com`
+1. `gcloud services enable iam.googleapis.com`
+1. `gcloud services enable cloudresourcemanager.googleapis.com`
 
 Those commands should have completed successfully. 
 
