@@ -60,11 +60,11 @@ hal config features edit --pipeline-templates true
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
 
-### BS to make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608
+###  make HAL not puke over empty GCR resistry https://github.com/spinnaker/halyard/issues/608
 sudo docker pull nginx
 sudo docker tag nginx:latest $ADDRESS/$PROJECT_NAME/nginx
 sudo gcloud docker -- push $ADDRESS/$PROJECT_NAME/nginx
-#### end BS
+#### end 
 
 hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRESS --username $USERNAME --password-file $PASSWORD_FILE --no-validate
 hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO

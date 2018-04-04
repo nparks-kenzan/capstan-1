@@ -6,7 +6,7 @@ Tools for creating Spinnaker demo environments
 What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical)) .... That big rope...it is a Halyard - ZING!
 
 if you are here you are interested in:
-- Using Kubernettes
+- Using Kubernetes
 - Using Spinnaker
 - Using Jenkins
 - Not wanting to figure out how to set all that up yourself on some IaaS
