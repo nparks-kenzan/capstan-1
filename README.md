@@ -29,20 +29,7 @@ Oh, we have a solution for you!
 
 ## Google Cloud Platform
 
- Future versions will also use *declarative pipelines*
-
-
-### Procedure
-1. Make sure you have followed the validation process described [here](./gcp/README.md)
-1. git clone this repo (fork from your own if you like)
-1. cd to the `gcp\terraform`
-   1. optionally edit values in `env.sh`
-1. Execute `terraform apply`
-1. Go to the bathroom / lunch / another meeting
-1. Hope for the best
-
-When this is done you will create an SSH tunnel to Spinnaker. More details of this process is documted [here](./gcp/README.md)
-
+1. The Procedure is described  [here](./gcp/README.md)
 
 ## Amazon Web Services
 
@@ -52,6 +39,10 @@ When this is done you will create an SSH tunnel to Spinnaker. More details of th
 ## Azure
 
 Coming...
+
+## Reference Pipeline
+
+As part of the Infrastructure-as-code story a couple *declarative pipelines* will be included that are IaaS agnostic. When all the IaaS(s) are added.
 
 ## See Also
 

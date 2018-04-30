@@ -14,7 +14,6 @@ If you have no idea how to even use GCP I would recommend a [coursera course](ht
 
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
 
-So git clone this project (or your own fork of it) and with your favorite command shell navigate to the the `gcp` folder
 
 ### Validate your GCP project
 
@@ -55,21 +54,23 @@ Terraform needs credentials to perform administrator level operations. To do thi
 1. In the list of accounts locate `terraform-admin` and in the options column select `create key`
 1. A json key file should be downloaded to your machine.
 1. Move/rename the json file to `gcp-account.json` and place in the folder with the other terraform scripts
+   1. Assumes you already git cloned
 
 #### Configure Terraform SSH
 
 Since, you were successful with `glcoud ssh` there is already a ssh configuration information located in `/home/[username]/.ssh/google_compute_engine`. Terraform will expect them to be there.
 
-### You are ready to begin
+## Finally You are ready to begin
 
 
-FINALLY....
 
 At this point, you need to change directory into the terraform folder and type:
 
-`whoami` which will get you your ssh username
+`whoami` which will get you your ssh username. You will use this later. Also make sure you have your GCP project ID (which could be different from project name) handy.
 
-`terraform plan` (you might have to perform `terraform init` first if you have not used terraform with GCP)
+`terraform init`
+
+`terraform plan` 
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
@@ -79,7 +80,7 @@ Now, wait 20 minutes.
 
 ## Validate your new Toys
 
-In all that Terraform Madness, there was this line...maybe 15 minutes into the process:
+In all that Terraform Madness, there was this line...maybe 8 minutes into the process:
 
 `
 google_compute_instance.halyardtunnel (remote-exec): ==========================================
@@ -96,7 +97,7 @@ If that works that means GKE is working and Jenkins is deployed.
 
 Next
 
-Using your work station you will create an SSH tunnel to your 'halyard-tunnel' GCP instance you created
+Using your work station you will create an SSH tunnel to your 'halyard-tunnel' GCP instance  created by terraform
 
 `
 gcloud compute --project "[PROJECT_NAME]" ssh --zone "[THE ZONE YOU DEPLOYED TOO]" "[halyard-tunnel or whatever]"  --ssh-flag="-L 9000:localhost:9000" --ssh-flag="-L 8084:localhost:8084"
@@ -133,7 +134,7 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
 
-## See Release Notes for GCP
+## As always see release notes for GCP
 
 [Release Notes](RELEASE_NOTES.MD)
 
