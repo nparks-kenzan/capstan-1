@@ -1,4 +1,4 @@
-# GCP Featuring GKE
+# Google Cloud Platform Featuring GKE
 
  
 The process is illustrated as follows:
