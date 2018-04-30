@@ -36,12 +36,13 @@ gcloud container clusters get-credentials --zone $CLUSTER_ZONE $CLUSTER_NAME
 
 kubectl cluster-info
 echo ">>>>> Helm Init"
-kubectl create -f tiller-rbac.yml
+kubectl create -f tiller_rbac.yml
 helm init --service-account tiller
 
-## this is where we need to do a watch command to see what the status of the cluster is
-sleep 10
+
 echo "=========================================="
 echo " - GKE Thing Together -"
 echo "=========================================="
 echo "******************************************"
+#pause log dump
+sleep 10
