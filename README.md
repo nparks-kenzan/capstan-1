@@ -23,9 +23,9 @@ Oh, we have a solution for you!
 1. Do you have [Terraform](https://www.terraform.io/) Installed?
 1. Do you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed?
 1. Tools for your target Iaas?
-  1. [GCLOUD SDK](https://cloud.google.com/sdk/downloads)
-  1. AWS CLI
-  1. AZURE SDK
+   1. [GCLOUD SDK](https://cloud.google.com/sdk/downloads)
+   1. AWS CLI
+   1. AZURE SDK
 
 ## Google Cloud Platform
 
@@ -42,7 +42,7 @@ Coming...
 
 ## Reference Pipeline
 
-As part of the Infrastructure-as-code story a couple *declarative pipelines* will be included that are IaaS agnostic. When all the IaaS(s) are added.
+As part of the *Infrastructure-as-code* story a couple *declarative pipelines* will be included that are IaaS agnostic. When all the IaaS(s) are added.
 
 ## See Also
 
