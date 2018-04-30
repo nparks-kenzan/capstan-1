@@ -1,6 +1,11 @@
-# GCP - GKE
+# GCP Featuring GKE
 
-This Folder contains the scripts and the terraform needed to create a Continuous Delivery with Continuous Integration environment featuring  Spinnaker and Jenkins both running in GKE. This is about delivering container based apps, if you want to muck around with GCE go [elsewhere](https://github.com/GoogleCloudPlatform/spinnaker-deploymentmanager).  
+ 
+The process is illustrated as follows:
+![GCP Process](gcp_process.png)
+
+
+Essentially, from your workstation you are using TerraForm to create a service account. K8 cluster and to launch and instance that will run a script landed by terraform to perform the creation of  jenkins and Spinnaker.
 
 If you have no idea how to even use GCP I would recommend a [coursera course](https://www.coursera.org/learn/gcp-infrastructure-foundation)
 
@@ -128,7 +133,7 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
 
-## See Release Notes
+## See Release Notes for GCP
 
 [Release Notes](RELEASE_NOTES.MD)
 
