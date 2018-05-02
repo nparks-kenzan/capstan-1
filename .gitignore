@@ -1,0 +1,20 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+
+#TLS stuff
+
+*.pem
+*.csr
+*.cer
+*.p12
+*.crt
+*.der
+*.pfx

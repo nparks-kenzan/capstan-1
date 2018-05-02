@@ -1,58 +1,48 @@
 # CAPSTAN
-Tools for creating Spinnaker demo environments
 
 ![Capstan Image](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Star_of_India_capstan_1.JPG/320px-Star_of_India_capstan_1.JPG)
 
-What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical)) .... That big rope...it is a Halyard - ZING!
+What is a [Capstan?](https://en.wikipedia.org/wiki/Capstan_(nautical))?
+Packaging of open source for creating Containerized CICD Environments.
 
 if you are here you are interested in:
 - Using Kubernetes
 - Using Spinnaker
-- Using Jenkins
+- Using a Cloud Iaas
 - Not wanting to figure out how to set all that up yourself on some IaaS
 - Just want to deploy containerized apps without all the fuss of doing all that set-up
+- Or not worried about apps but want to see a packaging of various concepts together...
 
 Oh, we have a solution for you!
 
-## Google Cloud Platform
 
-This Demo environment creates a CD environment where Spinnaker and Jenkins are running within a GKE cluster.
-
-The process is illustrated as follows:
-![GCP Process](gcp_process.png)
-
-
-Essentially, from your workstation you are using TerraForm to create a service account. K8 cluster and to launch and instance that will run a script landed by terraform to perform the creation of  jenkins and Spinnaker. Future versions will also use *declarative pipelines*
-
-### Prerequisites
+## Prerequisites
 
 1. Do you have a computer (Mac Preferred)
-1. Do you have a GCP project for this?
+1. Do you have a Cloud Account?
 1. Do you have [Terraform](https://www.terraform.io/) Installed?
 1. Do you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed?
-1. Do you have [GCLOUD SDK](https://cloud.google.com/sdk/downloads) installed?
+1. Tools for your target Iaas?
+   1. [GCLOUD SDK](https://cloud.google.com/sdk/downloads)
+   1. AWS CLI
+   1. AZURE SDK
 
-That's it
+## Google Cloud Platform
 
-
-### Procedure
-1. Make sure you have followed the validation process described [here](./gcp/README.md)
-1. git clone this repo (fork from your own if you like)
-1. cd to the `gcp\terraform`
-   1. optionally edit values in `env.sh`
-1. Execute `terraform apply`
-1. Go to the bathroom / lunch / another meeting
-1. Hope for the best
-
-When this is done you will create an SSH tunnel to Spinnaker. More details of this process is documted [here](./gcp/README.md)
-
+1. The Procedure is described  [here](./gcp/README.md)
 
 ## Amazon Web Services
 
 1. I will throw our good friend @jpancoast-kenzan under the bus at https://github.com/kenzanlabs/spinnaker-terraform
 1. Otherwise waiting on EKS like everyone else
 
+## Azure
 
+Coming...
+
+## Reference Pipeline
+
+As part of the *Infrastructure-as-code* story a couple *declarative pipelines* will be included that are IaaS agnostic. When all the IaaS(s) are added.
 
 ## See Also
 
