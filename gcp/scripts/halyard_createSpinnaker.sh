@@ -16,7 +16,7 @@ CLUSTER_NAME=$2
 CLUSTER_ZONE=$3
 
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
-
+HALYARD_CANARY_ACCOUNT_NAME="$CLUSTER_NAME-canary"
 ####
 
 echo "******************************************"
@@ -101,7 +101,7 @@ echo "==== -> Enable Canary and Metrics"
 
 hal config canary enable
 hal config canary google enable
-hal config canary google account add my-google-account --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket $MY_SPINNAKER_BUCKET
+hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST  --bucket-location $BUCKET_LOCATION
 hal config canary google edit --gcs-enabled true --stackdriver-enabled true
 
 #Metric Store
