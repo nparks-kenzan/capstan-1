@@ -101,7 +101,7 @@ echo "==== -> Enable Canary and Metrics"
 
 hal config canary enable
 hal config canary google enable
-hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST  --bucket-location $BUCKET_LOCATION
+hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket "$HALYARD_CANARY_ACCOUNT_NAME-$RANDOM" --bucket-location $BUCKET_LOCATION
 hal config canary google edit --gcs-enabled true --stackdriver-enabled true
 
 #Metric Store
