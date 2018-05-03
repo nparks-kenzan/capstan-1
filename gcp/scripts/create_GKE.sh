@@ -38,7 +38,9 @@ kubectl cluster-info
 echo ">>>>> Helm Init"
 kubectl create -f tiller_rbac.yml
 helm init --service-account tiller
-
+# give the cluster a break, if your K8 is small
+sleep 10
+helm version
 
 echo "=========================================="
 echo " - GKE Thing Together -"
