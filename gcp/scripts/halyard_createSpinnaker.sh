@@ -36,6 +36,7 @@ SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOU
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.viewer --member serviceAccount:$SA_EMAIL
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.metricWriter --member serviceAccount:$SA_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/compute.viewer --member serviceAccount:$SA_EMAIL
 
 mkdir -p $(dirname $SERVICE_ACCOUNT_DEST)
 
@@ -99,14 +100,17 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
 echo "==== -> Enable Canary and Metrics"
 
-hal config canary enable
-hal config canary google enable
-hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket "$HALYARD_CANARY_ACCOUNT_NAME-$RANDOM" --bucket-location $BUCKET_LOCATION
-hal config canary google edit --gcs-enabled true --stackdriver-enabled true
-
 #Metric Store
 hal config metric-stores stackdriver edit --credentials-path $SERVICE_ACCOUNT_DEST
 hal config metric-stores stackdriver enable
+
+#canary
+hal config canary edit --default-metrics-store $CANARY_METRIC_STORE --default-metrics-account $HALYARD_CANARY_ACCOUNT_NAME
+ 
+hal config canary enable
+hal config canary google enable
+hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket "$HALYARD_CANARY_ACCOUNT_NAME-$RANDOM" 
+hal config canary google edit --gcs-enabled true --stackdriver-enabled true
 
 echo "==== -> Remember Jenkins"
 
