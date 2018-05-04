@@ -25,10 +25,11 @@ JENKINS_HELM_RELEASENAME="ci"
 
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
-SERVICE_ACCOUNT_NAME=gcr-spinnaker
-SERVICE_ACCOUNT_DEST=~/.gcp/gcr-account.json
+SERVICE_ACCOUNT_NAME=gcp-spinnaker
+SERVICE_ACCOUNT_DEST=~/.gcp/gcp-account.json
 REGISTRY_NAME=gcpimagerepository
-SPINNAKER_VERSION="1.5.4"
+SPINNAKER_VERSION="1.7.2"
+CANARY_METRIC_STORE="stackdriver"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
 DOCKER_REPO="netflixoss/eureka netflixoss/zuul owasp/zap2docker-stable"

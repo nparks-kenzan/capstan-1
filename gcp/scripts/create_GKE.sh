@@ -37,8 +37,12 @@ gcloud container clusters get-credentials --zone $CLUSTER_ZONE $CLUSTER_NAME
 kubectl cluster-info
 echo ">>>>> Helm Init"
 kubectl create -f tiller_rbac.yml
-helm init --service-account tiller
-
+#give k8 a break if your cluster is small
+sleep 5
+helm init --service-account tiller --wait
+# give the cluster a break, if your K8 is small
+sleep 5
+helm version
 
 echo "=========================================="
 echo " - GKE Thing Together -"

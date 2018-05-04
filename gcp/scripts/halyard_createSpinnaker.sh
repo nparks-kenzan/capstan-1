@@ -16,7 +16,7 @@ CLUSTER_NAME=$2
 CLUSTER_ZONE=$3
 
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
-
+HALYARD_CANARY_ACCOUNT_NAME="$CLUSTER_NAME-canary"
 ####
 
 echo "******************************************"
@@ -34,7 +34,9 @@ gcloud iam service-accounts create  $SERVICE_ACCOUNT_NAME --display-name $SERVIC
 SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOUNT_NAME" --format='value(email)')
 
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL
-
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.viewer --member serviceAccount:$SA_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.metricWriter --member serviceAccount:$SA_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/compute.viewer --member serviceAccount:$SA_EMAIL
 
 mkdir -p $(dirname $SERVICE_ACCOUNT_DEST)
 
@@ -70,12 +72,10 @@ hal config provider docker-registry account add $REGISTRY_NAME  --address $ADDRE
 hal config provider docker-registry account add $DOCKER_HUB_NAME  --address $DOCKER_ADDR --repositories $DOCKER_REPO
 hal config provider docker-registry enable
 
-#echo "==== -> NoneSense Kubectl fix"
+echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 CONTEXT_prefix="gke_"
 CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
-
-echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
@@ -97,6 +97,20 @@ echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 #hal config security ui ssl disable
 
 #### we also need to update the base urls
+
+echo "==== -> Enable Canary and Metrics"
+
+#Metric Store
+hal config metric-stores stackdriver edit --credentials-path $SERVICE_ACCOUNT_DEST
+hal config metric-stores stackdriver enable
+
+#canary
+hal config canary edit --default-metrics-store $CANARY_METRIC_STORE --default-metrics-account $HALYARD_CANARY_ACCOUNT_NAME
+ 
+hal config canary enable
+hal config canary google enable
+hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket "$HALYARD_CANARY_ACCOUNT_NAME-$RANDOM" 
+hal config canary google edit --gcs-enabled true --stackdriver-enabled true
 
 echo "==== -> Remember Jenkins"
 
