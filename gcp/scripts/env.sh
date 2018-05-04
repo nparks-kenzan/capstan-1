@@ -29,6 +29,7 @@ SERVICE_ACCOUNT_NAME=gcp-spinnaker
 SERVICE_ACCOUNT_DEST=~/.gcp/gcp-account.json
 REGISTRY_NAME=gcpimagerepository
 SPINNAKER_VERSION="1.7.2"
+CANARY_METRIC_STORE="stackdriver"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
 DOCKER_REPO="netflixoss/eureka netflixoss/zuul owasp/zap2docker-stable"
