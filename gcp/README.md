@@ -23,11 +23,11 @@ As always git clone this repo (or a fork of it)
 
 To make sure we don't stumble into problems later, you need to perform the following:
 1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin` (or anything you will remember). 
-  1. If you are presented with the option to generate a JSON key file do and save it for later.
+    1. If you are presented with the option to generate a JSON key file do and save it for later.
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin` (or whatever you called it)
-1. Know leave your browser and open a terminal window
+1. Now leave your browser and open a terminal window
 1. Perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) if you have not done so as part of installing gcloud
-  1. Make sure your your environment is referencing the current project (via `gcloud info`)
+   1. Make sure your your environment is referencing the current project (via `gcloud info`)
 1. From your laptop perform a `gcloud ssh` into said instance. You can get the full  `gcloud` command from the dropdown arrow next to the SSH button for the instance.  
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 
@@ -53,7 +53,7 @@ If you were able to perform the final ssh option with gcloud you inadvertently p
 #### Configure Terraform GCP Credentials
 Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file.
 
-_If you already created the json key file previsoulsy skip to step 5_
+_If you already created the json key file previsoulsy, skip to step 5_
 1. Log into the Google  Console and select the project.
 1. Navigate to `IAM & Admin`, click on "Service Accounts" on the left
 1. In the list of accounts locate `terraform-admin` and in the options column select `create key`
@@ -139,7 +139,16 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
 
-## Do see the elease notes
+## Do see the Release notes
 
 [Release Notes](RELEASE_NOTES.MD)
 
+## What about using the Google Cloud Shell?
+
+Yes, you can use the Google Cloud Shell!
+
+There are only a couple changes
+1. You don't need to gcloud init in the shell
+1. To get the Service account key for terraform you need to perform
+    1. Navigate to the terraform folder of you git clone of this project
+    1. gcloud iam service-accounts keys create gcp-account.json --iam-account {serviceacounntname}@{GCP Project Name}.iam.gserviceaccount.com
