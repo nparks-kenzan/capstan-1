@@ -12,7 +12,9 @@ If you have no idea how to even use GCP I would recommend a [coursera course](ht
 
 ## Let's Get Started
 
-You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path.
+You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path. These steps assume a fresh GCP project.
+
+As always git clone this repo (or a fork of it)
 
 
 ### Validate your GCP project
@@ -20,9 +22,12 @@ You need to validate your GCP project and make sure terraform can do what it nee
 #### Connectivity 
 
 To make sure we don't stumble into problems later, you need to perform the following:
-1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin`
-1. Create a micro instance in `us-central1-a` with the service account `terraform-admin`
+1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin` (or anything you will remember). 
+    1. If you are presented with the option to generate a JSON key file do and save it for later.
+1. Create a micro instance in `us-central1-a` with the service account `terraform-admin` (or whatever you called it)
+1. Now leave your browser and open a terminal window
 1. Perform a [gcloud init](https://cloud.google.com/sdk/gcloud/reference/init) if you have not done so as part of installing gcloud
+   1. Make sure your your environment is referencing the current project (via `gcloud info`)
 1. From your laptop perform a `gcloud ssh` into said instance. You can get the full  `gcloud` command from the dropdown arrow next to the SSH button for the instance.  
    1. This is to check connectivity between your laptop to GCP in a manner similar to what terraform will ultimately do.
 
@@ -48,7 +53,7 @@ If you were able to perform the final ssh option with gcloud you inadvertently p
 #### Configure Terraform GCP Credentials
 Terraform needs credentials to perform administrator level operations. To do this you need to download a json credentials file.
 
-**Procedure**
+_If you already created the json key file previsoulsy, skip to step 5_
 1. Log into the Google  Console and select the project.
 1. Navigate to `IAM & Admin`, click on "Service Accounts" on the left
 1. In the list of accounts locate `terraform-admin` and in the options column select `create key`
@@ -91,7 +96,7 @@ google_compute_instance.halyardtunnel (remote-exec): ===========================
 
 So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way.
 
-So **check #1.** Make sure you can log into Jenkins
+So **check #1.** Make sure you can log into Jenkins at http://{above IP address}:8080
 
 If that works that means GKE is working and Jenkins is deployed.
 
@@ -134,7 +139,20 @@ Repeat this process and in the "Kind" dropdown select "Kubernetes Service Accoun
 
 NOTICE: Do not configure the kubernetes plugin to use credentials
 
-## As always see release notes for GCP
+## Do see the Release notes
 
 [Release Notes](RELEASE_NOTES.MD)
+
+## What about using the Google Cloud Shell?
+
+Yes, you can use the Google Cloud Shell!
+
+There are only a couple changes
+1. You don't need to gcloud init in the shell
+1. You don't need to install git (it is there already)
+1. You do need to install terraform
+1. To get the Service account key for terraform you need to perform
+    1. Navigate to the terraform folder of you git clone of this project
+    1. gcloud iam service-accounts keys create gcp-account.json --iam-account {serviceacounntname}@{GCP Project Name}.iam.gserviceaccount.com
+1. You still need to perform the connectivity test
 
