@@ -152,3 +152,4 @@ There are only a couple changes
 1. To get the Service account key for terraform you need to perform
     1. Navigate to the terraform folder of you git clone of this project
     1. gcloud iam service-accounts keys create gcp-account.json --iam-account {serviceacounntname}@{GCP Project Name}.iam.gserviceaccount.com
+1. You still need to perform the connectivity test
