@@ -149,7 +149,10 @@ Yes, you can use the Google Cloud Shell!
 
 There are only a couple changes
 1. You don't need to gcloud init in the shell
+1. You don't need to install git (it is there already)
+1. You do need to install terraform
 1. To get the Service account key for terraform you need to perform
     1. Navigate to the terraform folder of you git clone of this project
     1. gcloud iam service-accounts keys create gcp-account.json --iam-account {serviceacounntname}@{GCP Project Name}.iam.gserviceaccount.com
 1. You still need to perform the connectivity test
+
