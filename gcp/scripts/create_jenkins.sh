@@ -17,7 +17,7 @@ echo "=========================================="
 
 #expecting tiller is in the environment
 #the wait flag means everything should be done...the replace flag means stop over existing
-helm install stable/jenkins --name $JENKINS_HELM_RELEASENAME --namespace $JENKINSNS --values $PWD/jenkins_helm.yml --replace --wait
+helm install stable/jenkins --name $JENKINS_HELM_RELEASENAME --namespace $JENKINSNS --replace --wait
 
 
 JENKINS_ADDRESS=$(kubectl get svc --namespace jenkins ci-jenkins --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
@@ -27,4 +27,5 @@ echo "=========================================="
 echo " - Jenkins with $JENKINS_PW at $JENKINS_ADDRESS -"
 echo "=========================================="
 echo "******************************************"
-
+#pause log dump
+sleep 10
