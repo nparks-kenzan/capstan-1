@@ -38,7 +38,7 @@ Oh, we have a solution for you!
 
 ### Amazon Web Services
 
-1. EKS is GA'd so it is coming soon
+1. EKS edition is coming soon
 
 ### Azure
 
