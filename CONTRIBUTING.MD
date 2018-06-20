@@ -30,13 +30,13 @@
 
 *Dirty Development and Stable Master*
 
-The latest and greatest code is always in Development. That does not mean that development always works. Master works as described in the related platform readme and release notes. Thusly, master will always (read with finger quotes) work. 
+The latest and greatest code is always in Development. That does not mean that development always works. Master works as described in the related platform readme and release notes. Thusly, master will always (finger quotes) work. 
 
 ### Fork and PR
 
 - Fork from development to get the latest and greatest code to perform fixes and additions
 - Perform PR(s) that merge back into development
-- if possible reference an existing issue that is addressed in the PR
+- if possible reference an existing issue that is addressed
 
 
 ## Releases and Tags
@@ -45,6 +45,6 @@ How are tags and releases used?
 
 - *Releases* in Github are always based on tags on master
 - Development should have the same features as master at every *release*
-- Tagged releases closely correlate to master and development having some sort of code parity
+
 
 
