@@ -1,7 +1,5 @@
 # How to Contribute to Capstan
 
-
-
 ## Creating Issues
 
 - Find something broken? No existing Github issue? Create a issue in Github
