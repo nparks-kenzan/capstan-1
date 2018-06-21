@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
 ##########################
-# Kenzan LLC -> Create Spinnaker
-#
-## Can your GCP Service Account do this?
-## Did you create Jenkins in GKE first?
-#
-# nparks@kenzan.com
+# Create Spinnaker
 ##########################
 ###
 source $PWD/env.sh
@@ -21,7 +16,7 @@ HALYARD_CANARY_ACCOUNT_NAME="$CLUSTER_NAME-canary"
 
 echo "******************************************"
 echo "=========================================="
-echo " - Let's Get this Halyard Thing Together -"
+echo " - Let's Get Core Spinnaker Config Together -"
 echo "=========================================="
 
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
@@ -88,11 +83,16 @@ hal config provider kubernetes enable
 
 echo "==== -> Let's Get that Oauth and SSL stuff set-up"
 
-#hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=kenzan.com
-
+#hal config security authn oauth2 edit --client-id $OAUTH2_CLIENT_ID --client-secret $OAUTH2_CLIENT_SECRET --provider google  --user-info-requirements hd=$GSUITE_DOMAIN
 #hal config security authn oauth2 enable
 
-##### if we are TLS terminating at load balancer
+### do we need to override base urls?
+#hal config security ui edit --override-base-url $DNSUI
+#hal config security api edit --override-base-url $DNSAPI
+
+#### Do you need local TLS set-up? do it here
+
+##### enable/enable based on TLS set-up
 #hal config security api ssl disable
 #hal config security ui ssl disable
 
@@ -122,18 +122,8 @@ echo $JENKINS_PW | $H_CMD
 
 hal config ci jenkins enable
 
-echo "==== -> Let's Diff our Deployment real quick"
-
-hal deploy diff
-
-
-echo "======= Time to be Gangsta, this will take a while  ========"
-hal deploy apply
-
 
 echo "=========================================="
-echo " - Hopefully there is a Spinnaker -"
-echo " - Tunnel to halyard-tunnel and"
-echo " - then run hal deploy connect"
+echo " - Core Spinnaker Config -"
 echo "=========================================="
 echo "******************************************"
