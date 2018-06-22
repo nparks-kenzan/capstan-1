@@ -32,6 +32,7 @@ gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin 
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.viewer --member serviceAccount:$SA_EMAIL
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.metricWriter --member serviceAccount:$SA_EMAIL
 gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/compute.viewer --member serviceAccount:$SA_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
 
 mkdir -p $(dirname $SERVICE_ACCOUNT_DEST)
 
