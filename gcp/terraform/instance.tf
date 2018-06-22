@@ -52,6 +52,7 @@ resource "google_compute_instance" "halyardtunnel" {
       "/home/${var.ssh_user}/create_GKE.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone}",
       "/home/${var.ssh_user}/helm_packages.sh",
       "/home/${var.ssh_user}/halyard_createSpinnaker.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone}",
+      "/home/${var.ssh_user}/enable_gpubsub.sh ${var.gcp_project_id} ${google_pubsub_subscription.spinnaker_subscription.name}  ${google_pubsub_topic.gcr_event_stream.name}",
 
       #"/home/${var.ssh_user}/enableOauth2.sh ${var.gcp_project_id} ${var.ux_fqdn} ${var.api_fqdn} ${var.oauth2_clientid} ${var.oauth2_secret} ${var.gsuite}",
       "/home/${var.ssh_user}/deploy_Spinnaker.sh",
