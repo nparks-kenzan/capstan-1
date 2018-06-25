@@ -10,6 +10,12 @@ resource "google_compute_instance" "halyardtunnel" {
     #"google_compute_ssl_certificate.genericwildcard",
     "google_project_iam_policy.project",
 
+    "google_service_account.spinnaker",
+    "google_service_account_iam_binding.spinnaker_storage_admin",
+    "google_service_account_iam_binding.spinnaker_monitoring_viewer",
+    "google_service_account_iam_binding.spinnaker_metric_writer",
+    "google_service_account_iam_binding.spinnaker_compute_viewer",
+
     "google_container_cluster.primary",
   ]
 
@@ -51,7 +57,7 @@ resource "google_compute_instance" "halyardtunnel" {
       "/home/${var.ssh_user}/instance_execute.sh",
       "/home/${var.ssh_user}/create_GKE.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone}",
       "/home/${var.ssh_user}/helm_packages.sh",
-      "/home/${var.ssh_user}/halyard_createSpinnaker.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone}",
+      "/home/${var.ssh_user}/halyard_createSpinnaker.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone} ${google_service_account.spinnaker.email}",
 
       #"/home/${var.ssh_user}/enableOauth2.sh ${var.gcp_project_id} ${var.ux_fqdn} ${var.api_fqdn} ${var.oauth2_clientid} ${var.oauth2_secret} ${var.gsuite}",
       "/home/${var.ssh_user}/deploy_Spinnaker.sh",
