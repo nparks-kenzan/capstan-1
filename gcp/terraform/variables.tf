@@ -11,7 +11,7 @@ variable "ssh_private_key_location" {}
 variable "creds_file" {}
 variable "service_account_name" {}
 
-variable "spinnaker_service_account" {
+variable "spinnaker_service_account_name" {
   default = "gcp-spinnaker"
 }
 

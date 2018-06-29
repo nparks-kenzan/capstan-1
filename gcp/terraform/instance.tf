@@ -8,13 +8,8 @@ resource "google_compute_instance" "halyardtunnel" {
     #"google_project_service.cloudresourcemanager_service",
     #"google_project_service.container_service",
     #"google_compute_ssl_certificate.genericwildcard",
-    "google_project_iam_policy.project",
 
-    "google_service_account.spinnaker",
-    "google_service_account_iam_binding.spinnaker_storage_admin",
-    "google_service_account_iam_binding.spinnaker_monitoring_viewer",
-    "google_service_account_iam_binding.spinnaker_metric_writer",
-    "google_service_account_iam_binding.spinnaker_compute_viewer",
+    "google_project_iam_policy.project",
 
     "google_container_cluster.primary",
   ]
