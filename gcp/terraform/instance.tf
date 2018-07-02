@@ -10,6 +10,7 @@ resource "google_compute_instance" "halyardtunnel" {
     #"google_compute_ssl_certificate.genericwildcard",
     "google_project_iam_policy.project",
 
+    "google_pubsub_subscription.spinnaker_subscription",
     "google_container_cluster.primary",
   ]
 
