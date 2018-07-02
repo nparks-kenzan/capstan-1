@@ -25,7 +25,6 @@ JENKINS_HELM_RELEASENAME="ci"
 
 ############################################ Halyard Spinnaker
 ADDRESS=gcr.io
-SERVICE_ACCOUNT_NAME=gcp-spinnaker
 SERVICE_ACCOUNT_DEST=~/.gcp/gcp-account.json
 REGISTRY_NAME=gcpimagerepository
 SPINNAKER_VERSION="1.7.5"

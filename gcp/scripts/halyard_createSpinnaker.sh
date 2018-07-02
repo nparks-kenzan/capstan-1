@@ -9,6 +9,7 @@ source $PWD/env.sh
 PROJECT_NAME=$1
 CLUSTER_NAME=$2
 CLUSTER_ZONE=$3
+SA_EMAIL=$4
 
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 HALYARD_CANARY_ACCOUNT_NAME="$CLUSTER_NAME-canary"
@@ -22,17 +23,6 @@ echo "=========================================="
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
 gcloud config set compute/zone $CLUSTER_ZONE
 
-echo "==== -> Let's Get a service account created"
-
-gcloud iam service-accounts create  $SERVICE_ACCOUNT_NAME --display-name $SERVICE_ACCOUNT_NAME
-
-SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:$SERVICE_ACCOUNT_NAME" --format='value(email)')
-
-gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/storage.admin --member serviceAccount:$SA_EMAIL
-gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.viewer --member serviceAccount:$SA_EMAIL
-gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/monitoring.metricWriter --member serviceAccount:$SA_EMAIL
-gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/compute.viewer --member serviceAccount:$SA_EMAIL
-gcloud projects add-iam-policy-binding $PROJECT_NAME --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
 
 mkdir -p $(dirname $SERVICE_ACCOUNT_DEST)
 
