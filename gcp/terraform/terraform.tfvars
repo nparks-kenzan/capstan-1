@@ -11,6 +11,8 @@ region = "us-central1"
 
 zone = "f"
 
+bucket_location = "us"
+
 ### Project Info
 #
 #gcp_project_id = "CHANGE ME"
