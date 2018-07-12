@@ -1,6 +1,7 @@
 variable "region" {}
 variable "gcp_project_id" {}
 variable "zone" {}
+variable "bucket_location" {}
 
 variable "halyard_machine_type" {}
 variable "halyard_machine_name" {}

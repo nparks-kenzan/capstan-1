@@ -10,6 +10,7 @@ PROJECT_NAME=$1
 CLUSTER_NAME=$2
 CLUSTER_ZONE=$3
 SA_EMAIL=$4
+BUCKET_NAME=$5
 
 HALYARD_K8_ACCOUNT_NAME="$CLUSTER_NAME-gkegcr"
 HALYARD_CANARY_ACCOUNT_NAME="$CLUSTER_NAME-canary"
@@ -39,7 +40,7 @@ echo "==== -> Let's Get Halyard Configuration Going"
 
 hal config version edit --version $SPINNAKER_VERSION
 
-hal config storage gcs edit --project $PROJECT_NAME --bucket-location $BUCKET_LOCATION --json-path $SERVICE_ACCOUNT_DEST
+hal config storage gcs edit --project $PROJECT_NAME --bucket $BUCKET_NAME --json-path $SERVICE_ACCOUNT_DEST
 
 hal config storage edit --type gcs
 
@@ -83,7 +84,7 @@ hal config canary edit --default-metrics-store $CANARY_METRIC_STORE --default-me
  
 hal config canary enable
 hal config canary google enable
-hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket "$HALYARD_CANARY_ACCOUNT_NAME-$RANDOM" 
+hal config canary google account add $HALYARD_CANARY_ACCOUNT_NAME --project $PROJECT_NAME --json-path $SERVICE_ACCOUNT_DEST --bucket $BUCKET_NAME
 hal config canary google edit --gcs-enabled true --stackdriver-enabled true
 
 echo "==== -> Remember Jenkins"
