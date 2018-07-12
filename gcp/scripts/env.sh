@@ -5,9 +5,6 @@ TOOLS_SERVICE_ACCOUNT_NAME=halyard-tunnel-tools
 
 ############################################# GCP / GKE
 
-#cloud storage location
-BUCKET_LOCATION=us
-
 ############################################### Jenkins
 
 ##### TLS Paths if you have them enter them here and comment out line in create_jenkins.sh otherwise the files will be created at this locations
