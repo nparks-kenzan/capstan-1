@@ -23,6 +23,7 @@ echo "=========================================="
 MESSAGE_FORMAT=GCR
 SERVICE_ACCOUNT_JSON=$SERVICE_ACCOUNT_DEST
 
+hal config pubsub google enable
 
 hal config pubsub google subscription add $PUBSUB_NAME \
     --subscription-name $SUBSCRIPTION \
