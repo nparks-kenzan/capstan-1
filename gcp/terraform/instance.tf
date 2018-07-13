@@ -7,29 +7,30 @@ resource "google_compute_instance" "halyardtunnel" {
     "google_project_iam_policy.project",
     "google_storage_bucket.spinnaker",
     "google_pubsub_subscription.spinnaker_subscription",
+
+    #"google_compute_ssl_certificate.genericwildcard",
     "google_container_cluster.primary",
   ]
 
-  #"google_project_service.iam_service",
-  #"google_project_service.cloudresourcemanager_service",
-  #"google_project_service.container_service",
-  #"google_compute_ssl_certificate.genericwildcard",
-
   tags = ["halyard", "${var.created_by}", "ssh-tunnel"]
+
   boot_disk {
     initialize_params {
       image = "${var.ubuntu_image}"
     }
   }
+
   service_account {
     scopes = ["userinfo-email", "cloud-platform"]
     email  = "${google_service_account.halyard_toolsacct.email}"
   }
+
   connection {
     user        = "${var.ssh_user}"
     private_key = "${file(var.ssh_private_key_location)}"
     agent       = false
   }
+
   network_interface {
     network = "default"
 
@@ -37,10 +38,12 @@ resource "google_compute_instance" "halyardtunnel" {
       // Ephemeral IP
     }
   }
+
   provisioner "file" {
     source      = "../scripts/"
     destination = "/home/${var.ssh_user}"
   }
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/${var.ssh_user}/*.sh",
