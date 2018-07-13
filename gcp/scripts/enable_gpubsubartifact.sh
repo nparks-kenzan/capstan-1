@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 ######################
-# Provide Subscription for Spinnaker
+# Provide Subscription and Artifacts for Spinnaker
 ######################
 source $PWD/env.sh
 
 
 echo "=========================================="
-echo " - Configure Google Pub Sub for Spinnaker -"
+echo " - Configure Google Pub Sub And GCS Artifacts for Spinnaker -"
 echo "=========================================="
 
 PROJECT_NAME=$1
@@ -30,8 +30,14 @@ hal config pubsub google subscription add $PUBSUB_NAME \
     --project $PROJECT_NAME \
     --message-format $MESSAGE_FORMAT
 
+hal config features edit --artifacts true
 
-echo " - Google Pub Sub config Complete -"
+hal config artifact gcs account add "$PROJECT_NAME-artifacts" --json-path $SERVICE_ACCOUNT_JSON
+
+hal config artifact gcs enable
+
+
+echo " - Google Pub Sub GCS Artifacts config Complete -"
 echo "=========================================="
 
 
