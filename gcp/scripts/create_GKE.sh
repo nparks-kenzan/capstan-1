@@ -31,6 +31,9 @@ sleep 5
 helm init --service-account tiller --wait
 helm version
 
+## create apps namespace
+kubectl create namespace apps
+
 echo "=========================================="
 echo " - GKE Thing Together -"
 echo "=========================================="

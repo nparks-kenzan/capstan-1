@@ -28,9 +28,9 @@ SPINNAKER_VERSION="1.7.5"
 CANARY_METRIC_STORE="stackdriver"
 
 DOCKER_HUB_NAME="dockerhubimagerepository"
-DOCKER_REPO="netflixoss/eureka netflixoss/zuul owasp/zap2docker-stable webgoat/webgoat-8.0"
+DOCKER_REPO="netflixoss/eureka netflixoss/zuul owasp/zap2docker-stable webgoat/webgoat-8.0 nparkskenzan/hellokenzan"
 DOCKER_ADDR="index.docker.io"
 
-OMIT_NAMESPACES=$JENKINSNS
+OMIT_NAMESPACES="$JENKINSNS,istio-system,kube-system,spinnaker"
 # we are assuming that glcoud credentials where added properly
 KUBECONFIG=".kube/config"

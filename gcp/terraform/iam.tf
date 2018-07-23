@@ -15,35 +15,48 @@ resource "google_project_iam_policy" "project" {
 
 data "google_iam_policy" "admin" {
   binding {
-    role    = "roles/owner"
+    role = "roles/owner"
+
     members = [
       "serviceAccount:${google_service_account.halyard_toolsacct.email}",
     ]
   }
 
   binding {
-    role    = "roles/storage.admin"
+    role = "roles/storage.admin"
+
     members = [
       "serviceAccount:${google_service_account.spinnaker.email}",
     ]
   }
 
   binding {
-    role    = "roles/monitoring.viewer"
+    role = "roles/monitoring.viewer"
+
     members = [
       "serviceAccount:${google_service_account.spinnaker.email}",
     ]
   }
 
   binding {
-    role    = "roles/monitoring.metricWriter"
+    role = "roles/monitoring.metricWriter"
+
     members = [
       "serviceAccount:${google_service_account.spinnaker.email}",
     ]
   }
 
   binding {
-    role    = "roles/compute.viewer"
+    role = "roles/compute.viewer"
+
+    members = [
+      "serviceAccount:${google_service_account.spinnaker.email}",
+    ]
+  }
+
+  binding {
+    role = "roles/pubsub.subscriber"
+
     members = [
       "serviceAccount:${google_service_account.spinnaker.email}",
     ]
