@@ -1,5 +1,21 @@
 # Google Cloud Platform RELEASE Notes
 
+
+## 2018.q3.beta.gcp
+
+- see previous release notes
+
+## 2018.q2.alpha.gcp.dnstlsoauth
+
+- Using `Hal deploy clean` with *advanced features* will result in loss of Kubernetes services that enable access to spinnaker without the ssh tunnel. Halyard does not know how via a subsequent `hal deploy apply` to redeploy the TLS endpoint configuration. To redeploy those services
+  - ssh into the `halyard tunnel` instance and perform the following commands
+  - `kubectl apply -f spin-deck-nodeport.yml`
+  - `kubectl apply -f spin-gate-nodeport.yml`
+  - `kubectl apply -f spinnaker-ingress.yml`
+  -  You may also need to update DNS entries based on the reported ip of the re-created ingress controller
+- see previous release notes
+
+
 ## 2018.q2.alpha.gcp.canary
 
 - see previous release notes

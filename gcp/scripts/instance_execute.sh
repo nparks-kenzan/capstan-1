@@ -36,7 +36,7 @@ sudo bash InstallHalyard.sh -y
 hal -v
 
 echo ">>>> Get Helm"
-HELM_VERSION=$( get_latest_release "kubernetes/helm" )
+HELM_VERSION=$( get_latest_release "helm/helm" )
 curl -LO https://kubernetes-helm.storage.googleapis.com/helm-$HELM_VERSION-linux-amd64.tar.gz
 tar -xzf helm-$HELM_VERSION-linux-amd64.tar.gz # Faster to not print the filenames when extracting.
 chmod +x linux-amd64/helm
