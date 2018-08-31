@@ -64,7 +64,7 @@ hal config storage edit --type gcs
 
 hal config features edit --pipeline-templates true
 
-hal config features edit --artifacts true
+#hal config features edit --artifacts true
 
 
 echo "==== -> Let's Get a Docker Registry using gcr.io added"
@@ -86,7 +86,7 @@ echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES  --provider-version v2
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES
 
 hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
