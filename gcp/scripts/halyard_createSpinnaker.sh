@@ -33,6 +33,24 @@ gcloud iam service-accounts keys create $SERVICE_ACCOUNT_DEST --iam-account $SA_
 
 USERNAME=_json_key
 PASSWORD_FILE=$SERVICE_ACCOUNT_DEST
+echo "===== -> first attempt at v2 service account"
+
+CONTEXT_prefix="gke_"
+CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
+
+
+#create namespace
+kubectl create namespace spinnaker
+#create service account
+kubectl create -f spinnaker-svcacct.yml
+#don't trust kubectl so let's pause
+sleep 5
+
+TOKEN=$(kubectl get secret --context $CONTEXT  $(kubectl get serviceaccount spinnaker-service-account --context $CONTEXT -n spinnaker  -o jsonpath='{.secrets[0].name}')  -n spinnaker -o jsonpath='{.data.token}' | base64 --decode)
+
+kubectl config set-credentials ${CONTEXT}-token-user --token $TOKEN
+kubectl config set-context $CONTEXT --user ${CONTEXT}-token-user
+
 
 
 echo "==== -> Let's Get Halyard Configuration Going"
@@ -63,12 +81,12 @@ hal config provider docker-registry enable
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
-CONTEXT_prefix="gke_"
-CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
+#CONTEXT_prefix="gke_"
+#CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
-hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES
+hal config provider kubernetes account add $HALYARD_K8_ACCOUNT_NAME  --context $CONTEXT --docker-registries $IMAGE_REPOS --omit-namespaces $OMIT_NAMESPACES  --provider-version v2
 
 hal config deploy edit --type distributed --account-name $HALYARD_K8_ACCOUNT_NAME
 
