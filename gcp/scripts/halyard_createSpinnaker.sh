@@ -81,8 +81,8 @@ hal config provider docker-registry enable
 
 echo "==== -> Let's get K8 on GKE associated using gcr.io added"
 
-#CONTEXT_prefix="gke_"
-#CONTEXT=$CONTEXT_prefix$PROJECT_NAME\_$CLUSTER_ZONE\_$CLUSTER_NAME
+
+
 
 IMAGE_REPOS="$REGISTRY_NAME,$DOCKER_HUB_NAME"
 
