@@ -1,7 +1,6 @@
 # Pipelines on GCP
 
-These pipelines are for Capstan Deployed onto GCP.
+These pipelines are ones developed against the GCP version of Capstan or used some IaaS specific capabilities.
 
-They are intented to demonstrate Spinnaker/K8 Integration unique to GKE and how Spinnaker can use GCP capabilities
-
+Unless otherwise specified, this collection of GCP pipelines build upon each other. So start with the *initial* pipelines. 
 
