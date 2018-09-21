@@ -1,6 +1,6 @@
 # Google Cloud Platform Featuring GKE
 
- 
+
 The process is illustrated as follows:
 ![GCP Process](gcp_process.png)
 
@@ -19,10 +19,10 @@ As always git clone this repo (or a fork of it)
 
 ### Validate your GCP project
 
-#### Connectivity 
+#### Connectivity
 
 To make sure we don't stumble into problems later, you need to perform the following:
-1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin` (or anything you will remember). 
+1. Create a [Service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances) with  'role/owner' for Terraform. Call it `terraform-admin` (or anything you will remember).
     1. If you are presented with the option to generate a JSON key file do and save it for later.
 1. Create a micro instance in `us-central1-a` with the service account `terraform-admin` (or whatever you called it)
 1. Now leave your browser and open a terminal window
@@ -36,7 +36,7 @@ If everything happened without issue then we are good. You no longer need this t
 
 #### Enable Google Project Features
 
-After verifying connectivity, we need to enable services/api endpoints for terraform. 
+After verifying connectivity, we need to enable services/api endpoints for terraform.
 
 Using the terminal window where you just attempted `gcloud ssh` perform the following commands to enable APIs for your project
 
@@ -44,7 +44,7 @@ Using the terminal window where you just attempted `gcloud ssh` perform the foll
 1. `gcloud services enable iam.googleapis.com`
 1. `gcloud services enable cloudresourcemanager.googleapis.com`
 
-Those commands should have completed successfully. 
+Those commands should have completed successfully.
 
 ### Set-up Terraform
 
@@ -67,7 +67,7 @@ Since, you were successful with `glcoud ssh` there is already a ssh configuratio
 
 ## For Advanced Users
 
-If you consider yourself DNS/TLS/Oauth2 capable, consider enabling those features [here](DNSTLSOauth2.md) before continuing. 
+If you consider yourself DNS/TLS/Oauth2 capable, consider enabling those features [here](DNSTLSOauth2.md) before continuing.
 
 
 ## Finally You are ready to begin
@@ -78,13 +78,13 @@ At this point, you need to change directory into the terraform folder and type:
 
 `terraform init`
 
-`terraform plan` 
+`terraform plan`
 
 it will prompt you for the ssh username and google project id. It will then show you the actions that it is going to attempt. If you agree with the plan...
 
 `terraform apply` and enter the ssh user name and project id again.
 
-Now, wait 20 minutes. 
+Now, wait 20 minutes.
 
 ## Validate and connect with your new Toys
 
@@ -118,6 +118,13 @@ If this works, navigating to `http://localhost:9000/` (incognito mode preferred)
 So that would be **check #2**
 
 Done!
+
+
+## Post Deploy Pipeline Templates Set-up
+
+Now that Spinnaker is set up, you can proceed with installing some [**Pipeline Templates**](https://github.com/spinnaker/dcd-spec/blob/master/PIPELINE_TEMPLATES.md) to get a feel for Spinnaker Pipelines.
+
+Instructions are located [**here**](../pipelines/README.md)
 
 
 ## Post Deploy Jenkins Set-up
@@ -157,4 +164,3 @@ There are only a couple changes
     1. Navigate to the terraform folder of you git clone of this project
     1. gcloud iam service-accounts keys create gcp-account.json --iam-account {serviceacounntname}@{GCP Project Name}.iam.gserviceaccount.com
 1. You still need to perform the connectivity test
-
