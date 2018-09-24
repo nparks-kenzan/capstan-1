@@ -7,27 +7,39 @@ It is recommended that you read this entire document before proceding
 
 ## Setup Procedure
 
-This depends on the *HelloAgain* app from previous pipeline steps. Make sure you have completed the previous pipeline exercices. 
-
-This pipeline assumes previous trigger work and deployments where executed. 
+- This depends on the *HelloAgain* app from previous pipeline steps. Make sure you have completed the previous pipeline exercices. 
+- This pipeline assumes previous trigger work and deployments where executed. 
 
 ### Disable previous "prod" pipeline
 
 The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. You can disable/delete this pipeline. 
 
 
-### Enable Canary
+### Enable Canary for you app
 
 By defaults, "apps" in Spinnaker are not canary enabled you will need to enable it. 
+To enable the canary feature go the `helloagain` app
+
+--- image for config ---
+--- image for enable ---
+
+This will enable the *Delivery* options. It is recommended that you refresh the browser to get this new top level menu item. 
 
 ### Deploy Canary Pipeline
-This will replace the "prod" pipeline we just deployed earlier.  
 
-spin pipeline save --file=canary_prod.json
+As with previous pipeline deployment, access the *tunnel instance* and navigate to gcp pipeline folder for canary. Once there execute the following command  
+
+`spin pipeline save --file=canary_prod.json`
+
+This will deploy the canary pipeline for the `helloagain` app but the pipeline is disabled.
 
 ### Create Analysis Configuration for Canary
 
+The canary step needs a Canary Configuration
 
+--- image of canary step missing configuration ---
+
+Let's create a canary configuration. 
 
 
 ## Run pipeline
@@ -49,6 +61,11 @@ If you are using the same app add the following line:
 BigDecimal[] val = new BigDecimal[100000];
 Arrays.fill(val, BigDecimal.ZERO);
 `
+to 
 
-This will change the behavior of the application. commit the change and let the appropiate pipeline triggers to start the process. Run the previous mention load program when the canary enabled `PROD` pipeline runs. 
 
+This will change the behavior of the application. commit the change and let the appropiate pipeline triggers  start the process. Run the previously mentioned load program when the canary enabled `PROD` pipeline runs. 
+
+## ... Next
+
+Decompose all the pipeline steps and their implications. What possible paths are not covered? What Errors are not accounted for?
