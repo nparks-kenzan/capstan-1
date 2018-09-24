@@ -9,6 +9,8 @@ Thus you will perform the following:
 
 ## Setup Procedure
 
+*Note: these directions document procedure using the spin cli with a vanilla capstan deployment (IE no DNS/TLS/Oauth2)*
+
 ### Create app
 
 The app you will create and app called "helloagain". This is your typical hello world app that we will associate with several pipelines going forward.
@@ -25,14 +27,14 @@ The app you will create and app called "helloagain". This is your typical hello 
 
 ### Push pipelines
 
-Using the same terminal that you used to create the app perform the 
+Using the same terminal that you used to create the app perform the following commands to create two very simple deploy pipelines
 
 
 1. spin pipeline save --file=uat_deploy.json
 1. spin pipeline save --file=prod_seed.json
 
 
-To verify they are present execute
+To verify they are present execute:
 `spin pipeline list --application helloagain`
 
 ### Create Load Balancers
@@ -45,13 +47,9 @@ In the same folder where you just pushed to pipelines to spinnaker execute the f
 
 ## Run pipelines
 
-Use the following commands to run pipelines.
-
+With the app create and two pipelines present, access the spinnaker UI and execute both pipelines. Then try to access both apps. 
 
 # ... Next Steps
 
-
-
-
-
+In this "execise" you used the spin cli to configure a spinnaker instance, kubectl to create loadbalancers (we will explore another method later) and executed both pipelines. Next, we will do a few more fancy pipelines and demonstrate other integrations with GCP. 
 
