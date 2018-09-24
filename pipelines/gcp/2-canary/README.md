@@ -13,15 +13,19 @@ This pipeline assumes previous trigger work and deployments where executed.
 
 ### Disable previous "prod" pipeline
 
-The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. 
+The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. You can disable/delete this pipeline. 
 
 
 ### Deploy Canary Pipeline
-This will replace the "prod" pipeline we just deployed
+This will replace the "prod" pipeline we just deployed earlier.  
+
+### Create Analysis Configuration for Canary
+
+
 
 ## Run pipeline
 
-This pipeline can take an hour to execute...because...the canary step is set to run for an hour. It is configured in `realtime` mode which means is needs data to perform analysis with. It if fails the canary step..well it may end sooner.
+This pipeline can take an hour to execute...because...the canary step is set to run for an hour. It is configured in `realtime` mode which requires enough real time to elapse for data capture. 
 
 ### Run it
  You can either manually run it or trigger the UAT pipeline. Explore the reports and metrics thate are displayed during/after pipeline execution
@@ -33,6 +37,11 @@ Since Canary is for *PRODUCTION* you need to create some load. You can use the g
 ### Change the App
 
 If you are using the same app add the following line:
+
+`
+BigDecimal[] val = new BigDecimal[100000];
+Arrays.fill(val, BigDecimal.ZERO);
+`
 
 This will change the behavior of the application. commit the change and let the appropiate pipeline triggers to start the process. Run the previous mention load program when the canary enabled `PROD` pipeline runs. 
 

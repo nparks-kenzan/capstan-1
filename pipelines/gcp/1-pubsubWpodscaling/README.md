@@ -3,7 +3,7 @@
 This pipeline demonstrates
 
 1. Google Cloud Builder
-1. Google Pub SuB Trigger from Google Container Registry that Triggers a Spinnaker Pipeline Deployment
+1. Google Pub Sub Trigger from Google Container Registry that Triggers a Spinnaker Pipeline Deployment
 1. Kubernetes Pod AutoScaling 
 
 ## Setup Procedure
@@ -12,9 +12,7 @@ This pipeline demonstrates
 
 ### Deploy Pipeline
 
-
 ### Configure Trigger
-
 
 
 ## Run Pipeline
