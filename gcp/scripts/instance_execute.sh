@@ -57,6 +57,11 @@ sudo mv roer-linux-amd64 /usr/local/bin/roer
 echo ">>>> Add the SPINNAKER_API environ"
 echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
 
+echo ">>>>> get spin"
+curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/$(curl -s https://storage.googleapis.com/spinnaker-artifacts/spin/latest)/linux/amd64/spin
+chmod +x spin
+sudo mv spin /usr/local/bin/spin
+
 #### We need expect also
 #sudo apt-get install expect -y
 
