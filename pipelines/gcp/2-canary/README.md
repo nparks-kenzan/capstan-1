@@ -16,10 +16,17 @@ This pipeline assumes previous trigger work and deployments where executed.
 The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. You can disable/delete this pipeline. 
 
 
+### Enable Canary
+
+By defaults, "apps" in Spinnaker are not canary enabled you will need to enable it. 
+
 ### Deploy Canary Pipeline
 This will replace the "prod" pipeline we just deployed earlier.  
 
+spin pipeline save --file=canary_prod.json
+
 ### Create Analysis Configuration for Canary
+
 
 
 
