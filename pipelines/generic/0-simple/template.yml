@@ -1,0 +1,165 @@
+---
+schema: "1"
+id: helloworld-simple
+protect: false
+metadata:
+  description: This is a basic template
+  name: HelloWorld-Simple
+  owner: anonymous
+  scopes:
+  - global
+  - default
+variables:
+- name: k8sAccount
+  description: K8s account for application
+  defaultValue: cdci-runtime-gkegcr
+- name: appName
+  description: Name of application
+  defaultValue: myapp
+- name: stageLoadBalancer
+  description: Load balancer to be used
+  defaultValue: myapp-stage
+- name: prodLoadBalancer
+  description: Load balancer to be used
+  defaultValue: myapp-prod
+- name: k8sAppNamespace
+  description: Namespace to be used for deploying application
+  defaultValue: apps
+- name: k8sClusterStage
+  description: K8s cluster for Stage
+  defaultValue: myapp-stage
+- name: k8sClusterProd
+  description: K8s cluster for Prod
+  defaultValue: myapp-prod
+configuration:
+  concurrentExecutions:
+    limitConcurrent: true
+    parallel: false
+stages:
+- id: step1
+  type: deploy
+  name: Deploy Stage
+  inject: {}
+  inheritanceControl: {}
+  config:
+    clusters:
+    - account: "{{ k8sAccount }}"
+      application: "{{ appName }}"
+      cloudProvider: kubernetes
+      containers:
+      - args: []
+        command: []
+        envFrom: []
+        envVars: []
+        imageDescription:
+          imageId: index.docker.io/nparkskenzan/hellokenzan:mstr
+          registry: index.docker.io
+          repository: nparkskenzan/hellokenzan
+          tag: mstr
+        imagePullPolicy: IFNOTPRESENT
+        name: nparkskenzan-hellokenzan
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts: []
+      deployment:
+        deploymentStrategy:
+          rollingUpdate:
+            maxSurge: "1"
+            maxUnavailable: "1"
+          type: RollingUpdate
+        enabled: true
+        minReadySeconds: 0
+        paused: false
+      dnsPolicy: ClusterFirst
+      events: []
+      initContainers: []
+      interestingHealthProviderNames:
+      - KubernetesContainer
+      - KubernetesPod
+      loadBalancers:
+      - "{{ stageLoadBalancer }}"
+      namespace: "{{ k8sAppNamespace }}"
+      nodeSelector: {}
+      podAnnotations: {}
+      provider: kubernetes
+      region: "{{ k8sAppNamespace }}"
+      replicaSetAnnotations:
+        deployment.kubernetes.io/desired-replicas: "1"
+        deployment.kubernetes.io/max-replicas: "2"
+        deployment.kubernetes.io/revision: "2"
+      securityGroups: []
+      stack: stage
+      strategy: ""
+      targetSize: 1
+      terminationGracePeriodSeconds: 30
+      volumeSources: []
+- id: step2
+  type: findImage
+  name: Check Stage
+  dependsOn:
+  - step1
+  inheritanceControl: {}
+  inject: {}
+  config:
+    cloudProvider: kubernetes
+    cloudProviderType: kubernetes
+    cluster: "{{ k8sClusterStage }}"
+    credentials: "{{ k8sAccount }}"
+    namespaces:
+    - "{{ k8sAppNamespace}}"
+    onlyEnabled: true
+    selectionStrategy: LARGEST
+- id: step3
+  type: deploy
+  name: Deploy Prod
+  dependsOn:
+  - step2
+  inheritanceControl: {}
+  inject: {}
+  config:
+    clusters:
+    - account: "{{ k8sAccount }}"
+      application: "{{ appName }}"
+      cloudProvider: kubernetes
+      containers:
+      - args: []
+        command: []
+        envFrom: []
+        envVars: []
+        imageDescription:
+          imageId: index.docker.io/nparkskenzan/hellokenzan:mstr
+          registry: index.docker.io
+          repository: nparkskenzan/hellokenzan
+          tag: mstr
+        imagePullPolicy: IFNOTPRESENT
+        name: nparkskenzan-hellokenzan
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts: []
+      dnsPolicy: ClusterFirst
+      events: []
+      initContainers: []
+      interestingHealthProviderNames:
+      - KubernetesContainer
+      - KubernetesPod
+      loadBalancers:
+      - "{{ prodLoadBalancer }}"
+      maxRemainingAsgs: 3
+      namespace: "{{ k8sAppNamespace }}"
+      nodeSelector: {}
+      podAnnotations: {}
+      provider: kubernetes
+      region: "{{ k8sAppNamespace }}"
+      replicaSetAnnotations: {}
+      rollback:
+        onFailure: true
+      securityGroups: []
+      stack: prod
+      strategy: redblack
+      targetSize: 2
+      terminationGracePeriodSeconds: 30
+      volumeSources: []
