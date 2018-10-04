@@ -20,7 +20,9 @@ The canary pipeline will replace the existing prod pipeline. First, run the prod
 By defaults, "apps" in Spinnaker are not canary enabled you will need to enable it. 
 To enable the canary feature go the `helloagain` app
 
+Click on Config:
 ![Config Button](config_button.png)
+Scroll down to the features section and click check the canary box
 ![Canary Enable](canary_enable.png)
 
 This will enable the *Delivery* options. It is recommended that you refresh the browser to get this new top level menu item as shown below:
