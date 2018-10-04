@@ -20,10 +20,13 @@ The canary pipeline will replace the existing prod pipeline. First, run the prod
 By defaults, "apps" in Spinnaker are not canary enabled you will need to enable it. 
 To enable the canary feature go the `helloagain` app
 
---- image for config ---
---- image for enable ---
+![Config Button](config_button.png)
+![Canary Enable](canary_enable.png)
 
-This will enable the *Delivery* options. It is recommended that you refresh the browser to get this new top level menu item. 
+This will enable the *Delivery* options. It is recommended that you refresh the browser to get this new top level menu item as shown below:
+
+![Delivery Menu](delivery_menu.png)
+
 
 ### Deploy Canary Pipeline
 
@@ -55,16 +58,14 @@ Since Canary is for *PRODUCTION* you need to create some load. You can use the g
 
 ### Change the App
 
-If you are using the same app add the following line:
+If you have been using the `hello-karyon-rxnetty` (AKA *HelloAgain* )app in this series we need to modify it to be "fatter". If you look [here](https://github.com/nparks-kenzan/hello-karyon-rxnetty-x/blob/feature/memoryhog/src/main/java/com/kenzan/karyon/rxnetty/endpoint/HelloEndpoint.java) you will see that we are making invocations to the primary endpoint larger when someone hits the hello endpoint and pass a string. 
 
-`
-BigDecimal[] val = new BigDecimal[100000];
-Arrays.fill(val, BigDecimal.ZERO);
-`
-to 
+For Example:
+`curl http://IP_of_loadbalancer/hello/stingOfchoice`
 
 
-This will change the behavior of the application. commit the change and let the appropiate pipeline triggers  start the process. Run the previously mentioned load program when the canary enabled `PROD` pipeline runs. 
+
+ 
 
 ## ... Next
 
