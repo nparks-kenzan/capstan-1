@@ -113,7 +113,7 @@ we need to modify it to be "fatter". If you look [here](https://github.com/npark
 Of course, when `prod` starts also start hey with
 `hey -c 50 -z 60m -m GET http://[IP ADDRESS OF Production LOAD BALANCER]/hello/somerandomstring` 
  
-You can use the GKE Dashboard to see load on the workload affect on the app. You can also use StackDriver.
+You can use the GKE Dashboard to see load affect on the app. You can also use StackDriver.
 
 
 ## ... Next
