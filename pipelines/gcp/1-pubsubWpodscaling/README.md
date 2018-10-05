@@ -28,5 +28,5 @@ Regardless of the method choosen, once a new container image appears in the loca
 
 Now that we have something deployed, let's trigger pod autoscaling. This pipeline configures a deployment to allow for auto-scaling for the deployed app. 
 
-IF you already have load generation capability point it to the load balancer and watch kubernetes respond. If you do not have that capability you can use this gist.
+IF you already have load generation capability point it to the load balancer and watch kubernetes respond. If you do not have that capability you can [hey](https://github.com/rakyll/hey).
 
