@@ -40,9 +40,9 @@ As with previous pipeline deployment, access the *tunnel instance* and navigate 
 
 `spin pipeline save --file=canary_prod.json`
 
-This will deploy the canary pipeline for the `helloagain` app but the pipeline is disabled.
+This will deploy the canary pipeline for the `helloagain` app but the pipeline will not be executable.
 
-### Create Analysis Configuration for Canary
+#### Create Analysis Configuration for Canary
 
 The canary step needs a Canary Configuration
 
@@ -50,29 +50,52 @@ The canary step needs a Canary Configuration
 
 Let's create a canary configuration. 
 
+#### Update Canary Setp in the Pipeline
+
 
 ## Run pipeline
 
 This pipeline can take an hour to execute...because...the canary step is set to run for an hour. It is configured in `realtime` mode which requires enough real time to elapse for data capture. 
 
-### Run it
+## Run it
  You can either manually run it or trigger the UAT pipeline. Explore the reports and metrics thate are displayed during/after pipeline execution
 
 ### Run it with some load
 
-Since Canary is for *PRODUCTION* you need to create some load. You can use the gist to generate load for your application. If you have an http load generating utility point it at the production load balancer while the pipeline is running. If not use this gist to generate load.  
+Since Canary is for *PRODUCTION* you need to create some load. Try using `Hey` that is located [here](https://github.com/rakyll/hey) (Why not run it in the google cloud shell?). Install `Hey` with:
+
+`go get -u github.com/rakyll/hey`
+
+Manually start the canary pipeline and run the following command with hey
+
+`hey -c 50 -z 60m -m GET http://[IP ADDRESS OF Production LOAD BALANCER]/hello/somerandomstring` 
+
+(Go take a break, this will be awhile, come back after lunch)
 
 ### Change the App
 
-If you have been using the `hello-karyon-rxnetty` (AKA *HelloAgain* )app in this series we need to modify it to be "fatter". If you look [here](https://github.com/nparks-kenzan/hello-karyon-rxnetty-x/blob/feature/memoryhog/src/main/java/com/kenzan/karyon/rxnetty/endpoint/HelloEndpoint.java) you will see that we are making invocations to the primary endpoint larger when someone hits the hello endpoint and pass a string. 
+It is time to change the *HelloAgain* app. This requires that you have performed the steps in the previous exercise regarding pubsub.
 
-For Example:
-`curl http://IP_of_loadbalancer/hello/stingOfchoice`
+we need to modify it to be "fatter". If you look [here](https://github.com/nparks-kenzan/hello-karyon-rxnetty-x/blob/feature/memoryhog/src/main/java/com/kenzan/karyon/rxnetty/endpoint/HelloEndpoint.java) you will see that we are making invocations to the primary endpoint larger when someone hits the hello endpoint and pass a string. Commit your changes to your fork. IF you need the previous exercises corretly, the `dev` pipeline will run followed by `uat` followed by the new `prod` featuring canary. 
 
-
-
+Of course, when `prod` starts also start hey with
+`hey -c 50 -z 60m -m GET http://[IP ADDRESS OF Production LOAD BALANCER]/hello/somerandomstring` 
  
+You can use the GKE Dashboard to see load on the workload affect on the app. You can also use StackDriver.
+
 
 ## ... Next
 
-Decompose all the pipeline steps and their implications. What possible paths are not covered? What Errors are not accounted for?
+1. Did the last Canary Pass/Fail?
+1. Did the code change impact the app at all?
+1. How would you change the Canary Pipeline?
+1. Can You change the Canary Config to force a failure/success of the canary step?
+
+
+
+Decompose all the pipeline steps and their implications.
+1. What pipeline paths not covered?
+1. What errors not accounted for?
+
+
+In this exercises we used "Memory Usage" as a metric because it is *built in* and maybe (just maybe) if your changes do not alter functionality your app should not get bigger(?!?). However, you should consider items like error rates and latency among others. How would you intrument your environment (if you need to) to gather those metrics?
