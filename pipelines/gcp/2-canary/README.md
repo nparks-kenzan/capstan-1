@@ -10,9 +10,11 @@ It is recommended that you read this entire document before proceding
 - This depends on the *HelloAgain* app from previous pipeline steps. Make sure you have completed the previous pipeline exercices. 
 - This pipeline assumes previous trigger work and deployments where executed. 
 
-### Disable previous "prod" pipeline
+### Disable/Delete previous "prod" pipeline
 
-The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. You can disable/delete this pipeline. 
+The canary pipeline will replace the existing prod pipeline. First, run the production pipeline and make sure that app deploys successfully. Then you can either delete or disable the pipeline. To delete the pipeline with the `spin` cli with:
+
+`spin pipeline delete --name prod-seed --application helloagain`
 
 
 ### Enable Canary for you app
@@ -46,12 +48,42 @@ This will deploy the canary pipeline for the `helloagain` app but the pipeline w
 
 The canary step needs a Canary Configuration
 
---- image of canary step missing configuration ---
+Access the Canary Configuation Screen:
+
+![Canary Config](canary_config_menu.png)
+
+Then create a new Configuration:
+
+![New Configuration](canary_config_addconfiguration.png)
 
 Let's create a canary configuration. 
 
+
+Name the configuration "K8Ram1500" with a description of "Simple Memory Growth Check". Procede to the "Metrics" section. 
+
+You are going to add a metric to "Group 1". Click "Add Metric" and create a new metric as shown in the following image. 
+
+![New Configuration](canary_config_metric.png)
+
+Then press okay. 
+
+Scroll down to the "Scoring Section" and set "Group 1" To 100.
+
+Then save changes
+
 #### Update Canary Setp in the Pipeline
 
+
+With the need to update the Canary Analysis step of our new prod pipeline. Access the pipeline configuraiton and click on the `Canary Analysis` Step. You will see there is an error with the Canary step that we will fix by supplying the configuration we just created.  
+
+![New Configuration](canary_stage_configname.png)
+
+Set the Config Name to `K8Ram1500` and save changes. 
+
+
+#### Enable Pipeline Trigger
+
+As shown in previous exercies regarding pipeline triggers, enable the trigger for you new prod pipeline featuring canary. 
 
 ## Run pipeline
 
@@ -99,3 +131,7 @@ Decompose all the pipeline steps and their implications.
 
 
 In this exercises we used "Memory Usage" as a metric because it is *built in* and maybe (just maybe) if your changes do not alter functionality your app should not get bigger(?!?). However, you should consider items like error rates and latency among others. How would you intrument your environment (if you need to) to gather those metrics?
+
+
+
+How Could I combine this with Istio Traffic Flow Control?
