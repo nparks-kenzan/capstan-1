@@ -19,6 +19,10 @@ get_latest_release() {
 
 sudo apt-get update
 
+echo ">>>> Get git and other good stuffs"
+### get git
+sudo apt-get install git golang-go -y
+
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
 
 echo ">>>> Get Kubectl"
@@ -42,11 +46,6 @@ tar -xzf helm-$HELM_VERSION-linux-amd64.tar.gz # Faster to not print the filenam
 chmod +x linux-amd64/helm
 sudo mv linux-amd64/helm /usr/local/bin/helm
 
-
-
-echo ">>>> Get git and other good stuffs"
-### get git
-sudo apt-get install git golang-go -y
 
 echo ">>>> Get Roer"
 ROER_VERSION=$( get_latest_release "spinnaker/roer" )
