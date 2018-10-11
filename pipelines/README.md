@@ -27,7 +27,7 @@ $ roer pipeline-template publish ./path/to/template.yml
 
 There are instructions for each template on how to create a template based pipeline in each template's respective directory.
 
-When no using Roer, the future api tool called [**Spin**](https://github.com/spinnaker/spin) will be used/
+When no using Roer, the future api tool called [**Spin**](https://github.com/spinnaker/spin) will be used
 
 
 ### AWS
@@ -38,3 +38,4 @@ TBD
 
 * [Spinnaker Pipeline Template Spec](https://github.com/spinnaker/dcd-spec/blob/master/PIPELINE_TEMPLATES.md)
 * [roer](https://github.com/spinnaker/roer) - Spinnaker Pipeline CLI
+* [**Spin**](https://github.com/spinnaker/spin) - Future Spinnaker CLI
