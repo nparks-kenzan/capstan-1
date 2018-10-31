@@ -43,6 +43,7 @@ In the same folder where you just pushed to pipelines to spinnaker execute the f
 
 1. `kubectl apply -f prod-loadbalancer.yaml` 
 1. `kubectl apply -f uat-loadbalancer.yaml`
+1. `kubectl apply -f dev-loadbalancer.yaml`
 
 
 ## Run pipelines
