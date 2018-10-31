@@ -9,11 +9,11 @@ You can read more about Pipeline Templates [**here**](https://github.com/spinnak
 
 It is recommended you start with `generic/` before moving on to more advanced, provider specific templates located in the other directories (like `gcp/`).
 
-Generally, you will have an SSH tunnel for connecting to Spinnaker and another terminal for using the tools instance. If you have performed the advanced capstan configuration you would not need the tunnel. The directions do not assume the advanced configuration.
+Generally, you will have an SSH tunnel for connecting to Spinnaker and another terminal for using the tools instance. If you have performed the advanced (AKA dns/tls/oauth2) capstan configuration you would not need the tunnel. The directions do not assume the advanced configuration.
 
 ### GCP
 
-In a new terminal connect to your `halyard-tunnel` instance:
+In a *new* terminal connect to your `halyard-tunnel` instance:
 
 ```bash
 $ gcloud compute --project "[PROJECT_NAME]" ssh --zone "[ZONE]" "[INSTANCE_NAME]"
