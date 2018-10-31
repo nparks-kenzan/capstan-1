@@ -13,7 +13,7 @@ Thus you will perform the following:
 
 ### Create app
 
-The app you will create and app called *helloagain*. This is your typical hello world app that we will associate with several pipelines going forward.
+The app you will create is called *helloagain*. This is your typical hello world app that we will associate with several pipelines going forward.
 
 1. Access the tools instance 
    1. One shell with ssh tunnel options
