@@ -17,7 +17,7 @@ The canary pipeline will replace the existing prod pipeline. First, run the prod
 `spin pipeline delete --name prod-seed --application helloagain`
 
 
-### Enable Canary for you app
+### Enable Canary for your app
 
 By defaults, "apps" in Spinnaker are not canary enabled you will need to enable it. 
 To enable the canary feature go the `helloagain` app
@@ -89,7 +89,7 @@ As shown in previous exercies regarding pipeline triggers, enable the trigger fo
 
 This pipeline can take an hour to execute...because...the canary step is set to run for an hour. It is configured in `realtime` mode which requires enough real time to elapse for data capture. 
 
-## Run it
+### Run it
  You can either manually run it or trigger the UAT pipeline. Explore the reports and metrics thate are displayed during/after pipeline execution
 
 ### Run it with some load
