@@ -108,7 +108,7 @@ Manually start the canary pipeline and run the following command with hey
 
 It is time to change the *HelloAgain* app. This requires that you have performed the steps in the previous exercise regarding pubsub.
 
-we need to modify it to be "fatter". If you look [here](https://github.com/nparks-kenzan/hello-karyon-rxnetty-x/blob/feature/memoryhog/src/main/java/com/kenzan/karyon/rxnetty/endpoint/HelloEndpoint.java) you will see that we are making invocations to the primary endpoint larger when someone hits the hello endpoint and pass a string. Commit your changes to your fork. IF you need the previous exercises corretly, the `dev` pipeline will run followed by `uat` followed by the new `prod` featuring canary. 
+we need to modify it to be "fatter". If you look [here](https://github.com/nparks-kenzan/hello-karyon-rxnetty-x/blob/feature/memoryhog/src/main/java/com/kenzan/karyon/rxnetty/endpoint/HelloEndpoint.java) you will see that we are making invocations to the primary endpoint larger (the additional of big decimal array) when someone hits the hello endpoint and pass a string. Commit your changes to your fork. IF you did the previous exercises corretly, the `dev` pipeline will run followed by `uat` followed by the new `prod` featuring canary. 
 
 Of course, when `prod` starts also start hey with
 `hey -c 50 -z 60m -m GET http://[IP ADDRESS OF Production LOAD BALANCER]/hello/somerandomstring` 
