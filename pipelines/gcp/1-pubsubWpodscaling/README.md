@@ -47,7 +47,7 @@ On the tools instance this readme and folder exist in a `pipelines folder`
 On the tools instance navigate to this folder and execute
 
 - `chmod +x sedprojectname.sh`
-- ` ./seedprojectname.sh` :this update the pipeline definition with your Google Project ID
+- ` ./seedprojectname.sh` :this will update the pipeline definition with your Google Project ID
 - `spin pipeline save --file=dev-pipeline.json`: deploys new pipeline
 
 This will add a new pipeline to Spinnaker as part of the HelloAgain app. 
@@ -58,7 +58,7 @@ To execute this pipeline you need to perform one of the following
 1. Add a new commit to the repo
 1. Manually Start a Build with Cloud Builder
 
-Regardless of the method choosen, once a new container image appears in the local GCR repository a Google PubSub event that Spinnaker subscribes to will be generated. As described in pipeline configuration earlier this will result in the pipeline being triggered and a code deployment.
+Regardless of the method choosen, once a new container image appears in the local GCR repository a Google PubSub event that Spinnaker subscribes to will be generated. The pipeline is configured to respond to changes to the `latest` container image and deploy it.
 
 
 ## Test Horizantal Pod Scaling
