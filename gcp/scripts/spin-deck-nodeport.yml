@@ -17,6 +17,7 @@ spec:
     protocol: TCP
     targetPort: 8008
   selector:
-    load-balancer-spin-deck: "true"
+    app: spin
+    cluster: spin-deck
   type: NodePort
 
