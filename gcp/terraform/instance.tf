@@ -44,6 +44,19 @@ resource "google_compute_instance" "halyardtunnel" {
     destination = "/home/${var.ssh_user}"
   }
 
+#make Directory for pipelines
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir /home/${var.ssh_user}/pipelines"
+    ]
+
+  }
+
+  provisioner "file" {
+    source      = "../../pipelines/"
+    destination = "/home/${var.ssh_user}/pipelines"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/${var.ssh_user}/*.sh",
@@ -57,6 +70,9 @@ resource "google_compute_instance" "halyardtunnel" {
       "/home/${var.ssh_user}/deploy_Spinnaker.sh",
 
       #"/home/${var.ssh_user}/enablednstls.sh ${var.gcp_project_id} ${var.ux_fqdn} ${var.api_fqdn} ${var.gcp_dns_zonename}",
+
+      #"/home/${var.ssh_user}/deploy_pipeline_templates.sh",
+
       "/home/${var.ssh_user}/noop.sh",
     ]
   }
