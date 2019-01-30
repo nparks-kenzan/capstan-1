@@ -18,8 +18,11 @@ get_latest_release() {
 }
 
 sudo apt-get update
-
+#echo $PATH
+#PATH="$PATH:/snap/bin"
 PROJECT_NAME=$(gcloud info --format='value(config.project)')
+echo $PATH
+
 
 echo ">>>> Get Kubectl"
 ### We need to get kubectl instead of having gloud install it for us
@@ -30,10 +33,11 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 echo ">>>> Get Halyard"
 #### get halyard
-curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/stable/InstallHalyard.sh
+curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
 sudo bash InstallHalyard.sh -y
 
 hal -v
+hal --ready
 
 echo ">>>> Get Helm"
 HELM_VERSION=$( get_latest_release "helm/helm" )
@@ -62,7 +66,7 @@ echo -e "\nexport SPINNAKER_API=http://127.0.0.1:8084\n" >> ~/.profile
 
 echo ">>>> Get Docker"
 #### this is not a version you would want to use but it will get the job done
-sudo apt-get install -y docker.io
+#sudo apt-get install -y docker.io
 
 echo $PWD
 echo "=========================================="
