@@ -30,8 +30,8 @@ The app you will create is called *helloagain*. This is your typical hello world
 Using the same terminal that you used to create the app perform the following commands to create two very simple deploy pipelines
 
 
-1. spin pipeline save --file=uat_deploy.json
-1. spin pipeline save --file=prod_seed.json
+1. `spin pipeline save --file=uat_deploy.json`
+1. `spin pipeline save --file=prod_seed.json`
 
 
 To verify they are present execute:
