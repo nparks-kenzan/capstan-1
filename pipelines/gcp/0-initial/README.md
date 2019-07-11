@@ -19,7 +19,7 @@ The app you will create is called *helloagain*. This is your typical hello world
    1. One shell with ssh tunnel options
       1. perform `hal deploy connect`
    1. Another (second) shell that you will be your command window
-1. In the second shell navigate to where the *GCP* pipelines are located
+1. In the second shell navigate to where this initial *GCP* pipeline is located (0-initial)
 1. Run the following command with the `Spin` cli
    1. `spin application save --application-name helloagain --owner-email CapstanonAWS@kenzan.com --cloud-providers kubernetes`
 1. Verify successfull app creation with the `Spin` CLI.
