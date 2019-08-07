@@ -27,6 +27,7 @@ resource "google_compute_instance" "halyardtunnel" {
 
   connection {
     user        = "${var.ssh_user}"
+    host        = "${google_compute_instance.halyardtunnel.network_interface.0.access_config.0.nat_ip}"
     private_key = "${file(var.ssh_private_key_location)}"
     agent       = false
   }
