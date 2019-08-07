@@ -37,9 +37,7 @@ To have Spinnaker able to run Jenkins Jobs perform the following two actions
 
 ### Get Jenkins API Key
 
-
-
-When Capstan completes the provisioning process, The Jenkins and Spinnaker integration may not be functional. Spinnaker is connected with Jenkins with the Jenkins username/password combination. However, we need the username and API key for Jenkins. To get the API key for the admin user visit Visit http://your.jenkins.server/me/configure and select show API key. With the API key access the `halyard-tunnel` instance and execute 'hal config ci jenkins master edit jnks --password' and enter the API key when prompted for the password. if you perform `hal config ci jenkins master get jnks` it should echo the api key back to you. Perform a  `hal deploy apply` to update spinnaker. 
+Log into Jenkins as the admin user and visit  http://your.jenkins.server/me/configure and select show API key. Copy thae key value. You will need it to configure Spinnaker. If you do not use the default admin user create a user with enough permissions to run jobs and get the API from that user.  
 
 ### Update Spinnaker
 
