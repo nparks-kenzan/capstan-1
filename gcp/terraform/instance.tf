@@ -63,7 +63,7 @@ resource "google_compute_instance" "halyardtunnel" {
       "chmod +x /home/${var.ssh_user}/*.sh",
       "/home/${var.ssh_user}/instance_execute.sh",
       "/home/${var.ssh_user}/create_GKE.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone}",
-      "/home/${var.ssh_user}/helm_packages.sh",
+   #   "/home/${var.ssh_user}/helm_packages.sh",
       "/home/${var.ssh_user}/halyard_createSpinnaker.sh ${var.gcp_project_id} ${var.gke_cluster_name} ${var.gke_primary_zone} ${google_service_account.spinnaker.email} ${google_storage_bucket.spinnaker.name}",
       "/home/${var.ssh_user}/enable_gpubsubartifact.sh ${var.gcp_project_id} ${google_pubsub_subscription.spinnaker_subscription.name}  ${google_pubsub_topic.gcr_event_stream.name}",
 

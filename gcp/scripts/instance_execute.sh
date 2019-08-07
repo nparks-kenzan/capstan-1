@@ -34,7 +34,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 echo ">>>> Get Halyard"
 #### get halyard
 curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
-sudo bash InstallHalyard.sh -y
+sudo bash InstallHalyard.sh -y --user $USER
 
 hal -v
 hal --ready
