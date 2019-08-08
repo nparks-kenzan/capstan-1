@@ -88,22 +88,6 @@ Now, wait 20 minutes.
 
 ## Validate and connect with your new Toys
 
-In all that Terraform Madness, there was this line...maybe 8 minutes into the process:
-
-`
-google_compute_instance.halyardtunnel (remote-exec): ==========================================
-google_compute_instance.halyardtunnel (remote-exec):  - Jenkins with UlbqnUcu81QH2p53bAen at 35.186.217.52 -
-google_compute_instance.halyardtunnel (remote-exec): ==========================================
-`
-
-
-So that represents the Jenkins master running in your GKE cluster. The password is auto-generated for each deployment. If you poked around in the GCP console in networking you will see this IP associated with some text that references *Jenkins* in some way.
-
-So **check #1.** Make sure you can log into Jenkins at http://{above IP address}:8080
-
-If that works that means GKE is working and Jenkins is deployed.
-
-Next
 
 Using your work station you will create an SSH tunnel to your 'halyard-tunnel' GCP instance  created by terraform
 
@@ -115,9 +99,6 @@ Once there you will then perform `hal deploy connect`
 
 If this works, navigating to `http://localhost:9000/` (incognito mode preferred) should give you the spinnaker interface.
 
-So that would be **check #2**
-
-Done!
 
 
 ## Post Deploy Pipeline Templates Set-up
@@ -126,23 +107,6 @@ Now that Spinnaker is set up, you can proceed with installing some [**Pipeline T
 
 Instructions are located [**here**](../pipelines/README.md)
 
-
-## Post Deploy Jenkins Set-up
-
-Access the Jenkins console to enable K8 based building.
-
-
-1. In the Jenkins UI, Click `Credentials` on the left
-1. Click the “(global)” link
-1. Click “Add Credentials” on the left
-1. From the “Kind” dropdown, select “Kubernetes Service Account”
-1. Click “OK”
-   1. You should get a name generated that looks like a GUID
-1. Navigate to `Manage Jenkins` and then `configure system`
-1. Scroll to cloud / Kubernetes settings
-1. Locate the `Credentials` dropdown and select the GUID name
-1. Save
-1. DONE
 
 
 

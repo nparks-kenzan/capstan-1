@@ -47,7 +47,7 @@ On the tools instance this readme and folder exist in a `pipelines folder`
 On the tools instance navigate to this folder and execute
 
 - `chmod +x sedprojectname.sh`
-- ` ./seedprojectname.sh` :this will update the pipeline definition with your Google Project ID
+- ` ./sedprojectname.sh` :this will update the pipeline definition with your Google Project ID
 - `spin pipeline save --file=dev-pipeline.json`: deploys new pipeline
 
 This will add a new pipeline to Spinnaker as part of the HelloAgain app. 
