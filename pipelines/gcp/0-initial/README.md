@@ -3,7 +3,7 @@
 This set of initial pipelines create and app and several pipelines with various configurations that will be used by later pipelines. 
 
 Thus you will perform the following:
-1. Create and App
+1. Create an App
 2. Add two simple pipelines
 3. execute the pipelines via spinnaker user experience and/or using the pre-installed [Spin cli](https://github.com/spinnaker/spin)  
 

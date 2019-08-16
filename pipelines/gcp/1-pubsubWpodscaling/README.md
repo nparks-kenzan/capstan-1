@@ -4,7 +4,7 @@ This pipeline demonstrates
 
 1. Google [Cloud Build](https://cloud.google.com/cloud-build/)
 1. Google [Pub Sub](https://cloud.google.com/pubsub/) Trigger from Google Container [Registry](https://cloud.google.com/container-registry/) that Triggers a Spinnaker Pipeline Deployment
-1. You will fork this [GitHub Repo](https://github.com/kenzanlabs/hello-karyon-rxnetty) as our *HelloAgain* app.
+1. You will fork [hello-karyon-rxnetty](https://github.com/kenzanlabs/hello-karyon-rxnetty) as our *HelloAgain* app.
 1. Kubernetes Pod AutoScaling (just for fun)
 
 It is assumed that you have a GitHub account and are familiar with using git
@@ -24,6 +24,7 @@ You should already have a fork of our *HelloAgain* app we are using.
 
 1. Make Sure you are signed into Github in the same browser as GCP
 1. Access the GCP console and locate Cloud Build menu
+1. Enable Cloud Build API (if not previously enabled)
 1. Access build triggers
 ![StartBuildTrigger](pubsub_bt_1.png)
 1. Select GitHub
@@ -41,8 +42,9 @@ You will deploy this image
 
 
 ### Deploy Pipeline 
+Switch to terminal 3 from previous steps, this is the tools instance.
 
-On the tools instance this readme and folder exist in a `pipelines folder`
+On the tools instance this readme and folder exist in a pipelines folder `pipelines/gcp/1-pubsubWpodscaling/`
 
 On the tools instance navigate to this folder and execute
 
@@ -67,7 +69,10 @@ Now that we have something deployed, let's trigger pod autoscaling. This pipelin
 
 IF you already have load generation capability point it to the load balancer and watch kubernetes respond. If you do not have that capability you can try using `Hey` that is located [here](https://github.com/rakyll/hey) (Why not run it in the google cloud shell?). Install `Hey` with:
 
+
 `go get -u github.com/rakyll/hey`
+
+note: hey requires go version 1.7+ and setting the GOPATH variable: [golang doc](https://github.com/golang/go/wiki/SettingGOPATH)
 
 Once you install `hey` 
 
