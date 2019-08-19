@@ -7,7 +7,7 @@ It is recommended that you read this entire document before proceding
 
 ## Setup Procedure
 
-- This depends on the *HelloAgain* app from previous pipeline steps. Make sure you have completed the previous pipeline exercices. 
+- This depends on the *HelloAgain* app from previous pipeline steps. Make sure you have completed the previous pipeline exercises. 
 - This pipeline assumes previous trigger work and deployments where executed. 
 
 ### Disable/Delete previous "prod" pipeline
@@ -38,7 +38,7 @@ This will enable the *Delivery* options. It is recommended that you refresh the 
 
 ### Deploy Canary Pipeline
 
-As with previous pipeline deployment, access the *tunnel instance* and navigate to gcp pipeline folder for canary. Once there execute the following command  
+As with previous pipeline deployment, access the *tools instance* and navigate to gcp pipeline folder for canary. Once there execute the following command  
 
 `spin pipeline save --file=canary_prod.json`
 
@@ -83,7 +83,7 @@ Set the Config Name to `K8Ram1500` and save changes.
 
 #### Enable Pipeline Trigger
 
-As shown in previous exercies regarding pipeline triggers, enable the trigger for you new prod pipeline featuring canary. 
+As shown in previous exercises regarding pipeline triggers, enable the trigger for you new prod pipeline featuring canary. 
 
 ## Run pipeline
 
