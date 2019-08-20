@@ -12,6 +12,8 @@ If you want to learn more about using GCP, I would recommend a [coursera course]
 
 ## Let's Get Started
 
+*Improved Automation of this set-up process under development [here](https://github.com/msettro/capstan-bootstrap)*
+
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path. These steps assume a fresh GCP project.
 
 As always git clone this repo (or a fork of it)
