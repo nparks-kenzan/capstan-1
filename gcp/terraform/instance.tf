@@ -4,7 +4,7 @@ resource "google_compute_instance" "halyardtunnel" {
   zone         = "${var.region}-${var.zone}"
 
   depends_on = [
-    
+    "google_project_iam_member.tools_owneradmin_iammember",
     "google_storage_bucket.spinnaker",
     "google_pubsub_subscription.spinnaker_subscription",
 
