@@ -3,7 +3,7 @@
 This set of initial pipelines create and app and several pipelines with various configurations that will be used by later pipelines. 
 
 Thus you will perform the following:
-1. Create and App
+1. Create an App
 2. Add two simple pipelines
 3. execute the pipelines via spinnaker user experience and/or using the pre-installed [Spin cli](https://github.com/spinnaker/spin)  
 
@@ -19,7 +19,7 @@ The app you will create is called *helloagain*. This is your typical hello world
    1. One shell with ssh tunnel options
       1. perform `hal deploy connect`
    1. Another (second) shell that you will be your command window
-1. In the second shell navigate to where the *GCP* pipelines are located
+1. In the second shell navigate to where this initial *GCP* pipeline is located (0-initial)
 1. Run the following command with the `Spin` cli
    1. `spin application save --application-name helloagain --owner-email CapstanonAWS@kenzan.com --cloud-providers kubernetes`
 1. Verify successfull app creation with the `Spin` CLI.
@@ -30,8 +30,8 @@ The app you will create is called *helloagain*. This is your typical hello world
 Using the same terminal that you used to create the app perform the following commands to create two very simple deploy pipelines
 
 
-1. spin pipeline save --file=uat_deploy.json
-1. spin pipeline save --file=prod_seed.json
+1. `spin pipeline save --file=uat_deploy.json`
+1. `spin pipeline save --file=prod_seed.json`
 
 
 To verify they are present execute:

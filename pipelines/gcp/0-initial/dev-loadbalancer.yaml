@@ -10,6 +10,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    load-balancer-helloagain-prod: "true"
+    load-balancer-helloagain-dev: "true"
   sessionAffinity: None
   type: LoadBalancer

@@ -201,7 +201,7 @@
     "canaryConfig": {
      "beginCanaryAnalysisAfterMins": "2",
      "canaryAnalysisIntervalMins": "15",
-     "canaryConfigId": "851bec07-cc5f-40a9-8892-25632db09740",
+
      "combinedCanaryResultStrategy": "LOWEST",
      "lifetimeDuration": "PT1H0M",
      "metricsAccountName": "cdci-runtime-canary",

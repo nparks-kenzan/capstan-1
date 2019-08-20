@@ -7,9 +7,9 @@
 # If you change this here
 # You need to change it in the env.sh
 #
-region = "us-central1"
+#region = "us-central1"
 
-zone = "f"
+#zone = "f"
 
 bucket_location = "us"
 
