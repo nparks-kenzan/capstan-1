@@ -27,7 +27,7 @@ variable "gke_node_machine_type" {
 
 variable "gke_primary_zone" {
     description = ""
-    default = "us-central1-a"
+    default = "${var.region}-${var.zone}"
 }
 
 variable "gke_additional_zones" {
