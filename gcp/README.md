@@ -109,9 +109,6 @@ Instructions are located [**here**](../pipelines/README.md)
 
 
 
-
-NOTICE: Do not configure the `kubernetes plugin` under plugins to use credentials
-
 ## Do see the Release notes
 
 [Release Notes](RELEASE_NOTES.MD)
