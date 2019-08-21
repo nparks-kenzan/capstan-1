@@ -1,6 +1,13 @@
-variable "region" {}
+
+variable "region" {
+  default="us-central1"
+}
 variable "gcp_project_id" {}
-variable "zone" {}
+
+
+variable "zone" {
+  default="f"
+}
 variable "bucket_location" {}
 
 variable "halyard_machine_type" {}

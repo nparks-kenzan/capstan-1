@@ -12,6 +12,8 @@ If you want to learn more about using GCP, I would recommend a [coursera course]
 
 ## Let's Get Started
 
+*Improved Automation of this set-up process under development [here](https://github.com/kenzanlabs/capstan-bootstrap)*
+
 You need to validate your GCP project and make sure terraform can do what it needs to do. Before you start, make sure you have git installed, gcloud sdk installed and up to date, and terraform installed. All of these items need to be in your path. These steps assume a fresh GCP project.
 
 As always git clone this repo (or a fork of it)
@@ -108,9 +110,6 @@ Now that Spinnaker is set up, you can proceed with installing some [**Pipeline T
 Instructions are located [**here**](../pipelines/README.md)
 
 
-
-
-NOTICE: Do not configure the `kubernetes plugin` under plugins to use credentials
 
 ## Do see the Release notes
 
