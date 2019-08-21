@@ -1,29 +1,62 @@
 
+variable "gcp_project_id" {}
+
+variable "ssh_user" {}
+
+
 variable "region" {
   default="us-central1"
 }
-variable "gcp_project_id" {}
 
 
 variable "zone" {
   default="f"
 }
-variable "bucket_location" {}
 
-variable "halyard_machine_type" {}
-variable "halyard_machine_name" {}
-variable "ubuntu_image" {}
+variable "regionzone" {
+  default="us-central1-a"
+}
 
-variable "ssh_user" {}
-variable "ssh_private_key_location" {}
+
+variable "bucket_location" {
+  default="us"
+}
+
+variable "halyard_machine_type" {
+  default="n1-standard-1"
+}
+
+variable "halyard_machine_name" {
+  default="halyard-tunnel"
+}
+
+variable "ubuntu_image" {
+  default="ubuntu-1604-xenial-v20190122a"
+}
+
+
+variable "ssh_private_key_location" {
+  default="~/.ssh/google_compute_engine"
+}
 variable "creds_file" {}
-variable "service_account_name" {}
+
+variable "service_account_name" {
+  default="halyard-tunnel-tools"
+}
 
 variable "spinnaker_service_account_name" {
   default = "gcp-spinnaker"
 }
 
-variable "created_by" {}
+variable "created_by" {
+  default="kenzan-capstan"
+}
+
+variable "gke_additional_zones" {
+    description = ""
+    type = "list"
+    default = []
+}
 
 #### Advanced DNS TLS Oauth2  
 variable "ux_fqdn" {

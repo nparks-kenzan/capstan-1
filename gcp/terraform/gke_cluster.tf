@@ -25,16 +25,9 @@ variable "gke_node_machine_type" {
     default = "n1-standard-2"
 }
 
-variable "gke_primary_zone" {
-    description = ""
-    default = "us-central1-a"
-}
 
-variable "gke_additional_zones" {
-    description = ""
-    type = "list"
-    default = []
-}
+
+
 
 resource "google_container_cluster" "primary" {
     name = "${var.gke_cluster_name}"
@@ -42,7 +35,7 @@ resource "google_container_cluster" "primary" {
     initial_node_count = "${var.gke_cluster_node_count}"
    # zone = "${var.gke_primary_zone}"
    # additional_zones = "${var.gke_additional_zones}"
-    location = "${var.gke_primary_zone}"
+    location = "${var.regionzone}"
     node_locations = "${var.gke_additional_zones}"
 
     depends_on = [
