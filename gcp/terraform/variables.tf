@@ -8,11 +8,11 @@ variable "gcp_project_id" {}
 variable "ssh_user" {}
 
 variable "regionzone" {
-  default="us-central1-a"
+  default="us-east4-b"
 }
 
 variable "creds_file" {
-  default=gcp-account.json
+  default="gcp-account.json"
 }
 
 
@@ -20,15 +20,7 @@ variable "creds_file" {
 ############# Defaults
 #############################
 
-## Legacy
-variable "zone" {
-  default="f"
-}
 
-## Legacy
-variable "region" {
-  default="us-central1"
-}
 
 
 variable "bucket_location" {
