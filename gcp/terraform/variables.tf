@@ -44,7 +44,7 @@ variable "halyard_machine_name" {
 }
 
 variable "ubuntu_image" {
-  default="ubuntu-1604-xenial-v20190122a"
+  default="ubuntu-1604-xenial-v20190816"
 }
 
 
