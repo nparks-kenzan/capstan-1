@@ -1,20 +1,33 @@
 
+#############################
+### Common items to set 
+#############################
+
 variable "gcp_project_id" {}
 
 variable "ssh_user" {}
 
+variable "regionzone" {
+  default="us-central1-a"
+}
 
-variable "region" {
-  default="us-central1"
+variable "creds_file" {
+  default=gcp-account.json
 }
 
 
+############################# 
+############# Defaults
+#############################
+
+## Legacy
 variable "zone" {
   default="f"
 }
 
-variable "regionzone" {
-  default="us-central1-a"
+## Legacy
+variable "region" {
+  default="us-central1"
 }
 
 
@@ -38,7 +51,7 @@ variable "ubuntu_image" {
 variable "ssh_private_key_location" {
   default="~/.ssh/google_compute_engine"
 }
-variable "creds_file" {}
+
 
 variable "service_account_name" {
   default="halyard-tunnel-tools"
@@ -58,7 +71,9 @@ variable "gke_additional_zones" {
     default = []
 }
 
+#############################
 #### Advanced DNS TLS Oauth2  
+#############################
 variable "ux_fqdn" {
   default = "spinnaker.example.com"
 }
